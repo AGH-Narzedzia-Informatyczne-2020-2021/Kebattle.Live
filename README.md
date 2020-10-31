@@ -1,4 +1,5 @@
 # Kebattle.Live
+![Kebsik](https://i.postimg.cc/W4xyq6YM/Daco-5453030.png)
 
 Nazwa użytkownika | Imię
 ------------------|-----
@@ -9,6 +10,5 @@ Nazwa użytkownika | Imię
 @Azuyuto | Mikołaj
 @palkahubert | Hubert
 
-@pmalisz
 
 Nie wiemy jeszcze co tu wpisać c:
