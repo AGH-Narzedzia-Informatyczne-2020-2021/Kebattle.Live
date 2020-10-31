@@ -9,6 +9,6 @@ Nazwa użytkownika | Imię
 @Azuyuto | Mikołaj
 @palkahubert | Hubert
 
-@palkahubert
+@pmalisz
 
 Nie wiemy jeszcze co tu wpisać c:
