@@ -8,7 +8,7 @@ Zamówienia mają trzy statusy:
 3. Gotowe do odebrania
 
 **W czym mogłoby to pomóc?**
-> Sprzedawca zamiast używać notesu, mógłby użyć aplikacji uruchomionej np. na tablecie i stworzyć kebaba klikająć raptem kilka przycisków na stronie.
+> Sprzedawca zamiast używać notesu, mógłby użyć aplikacji uruchomionej np. na tablecie i stworzyć kebaba klikająć zaledwie kilka przycisków na stronie.
 
 > Klient nie musiałby podchodzić do kasy w restuauracji, by złożyć zamówienie. Mógłby to zrobić za pomocą np. telefonu (wraz z płatnością). **Wiedziałby także, kiedy zamówienie jest gotowe do odebrania.**
 
