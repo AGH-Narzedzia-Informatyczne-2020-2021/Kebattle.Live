@@ -1,5 +1,4 @@
 # Kebattle.Live
-# Nie wiemy jeszcze co tu wpisać c:
 ![Kebsik](https://i.postimg.cc/W4xyq6YM/Daco-5453030.png)
 
 Nazwa użytkownika | Imię
