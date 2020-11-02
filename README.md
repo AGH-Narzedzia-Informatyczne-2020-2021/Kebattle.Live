@@ -33,7 +33,7 @@ Nazwa użytkownika | Imię
 - [x] Założyć konto na [Trello](https://trello.com/)
 - [x] Dodać plik _.gitignore_
 - [x] Dodać plik __README__
-- [ ] Stworzyć zespołowy opis projektu
+- [x] Stworzyć zespołowy opis projektu
 - [x] Stworzyć __README__ na swoim profilu
 - [x] Wrzucić coś do swojego repozytorium
 - [ ] Umówić się na spotkanie za pomocą ankiety [Doodle](https://doodle.com/en/)
