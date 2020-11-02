@@ -8,7 +8,7 @@ Nasz projekt to aplikacja, która ma pomóc restauracjom typu Kabab w zarządzan
 **W czym mogłoby to pomóc?**
 > Sprzedawca zamiast używać notesu, mógłby użyć aplikacji uruchomionej np. na tablecie i stworzyć kebaba klikająć raptem kilka przycisków na stronie.
 
-> Klient nie musiałby podchodzić do kasy w restuauracji, by złożyć zamówienie. Mógłby to zrobić za pomocą np. telefonu (wraz z płatnością).
+> Klient nie musiałby podchodzić do kasy w restuauracji, by złożyć zamówienie. Mógłby to zrobić za pomocą np. telefonu (wraz z płatnością). **Wiedziałby także, kiedy zamówienie jest gotowe do odebrania.**
 
 ![Kebsik](https://i.postimg.cc/W4xyq6YM/Daco-5453030.png)
 
