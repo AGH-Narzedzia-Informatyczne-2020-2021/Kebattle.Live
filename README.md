@@ -1,6 +1,8 @@
 # Kebattle.Live
 
-Nasz projekt to aplikacja, która ma pomóc restauracjom typu Kabab w zarządzaniu zamówieniami. W aplikacji może je stworzyć zarówno klient jak i sprzedawca. Następnie można sprawdzić stan swojego zamówienia na stronie restauracji
+Nasz projekt to aplikacja, która ma na celu pomoc restauracjom typu Kabab - w zarządzaniu zamówieniami. W aplikacji może je stworzyć zarówno klient jak i sprzedawca. Następnie można sprawdzić stan swojego zamówienia na stronie restauracji.
+
+Zamówienia mają trzy statusy:
 1. Nowe zamówienie
 2. W trakcie przygotowania
 3. Gotowe do odebrania
