@@ -1,4 +1,4 @@
-# Kebattle.Live
+# Kebattle.Live ![Wersja](https://github.com/AGH-Narzedzia-Informatyczne/Kebattle.Live/blob/master/Obrazki/version.PNG) ![Licencja](https://github.com/AGH-Narzedzia-Informatyczne/Kebattle.Live/blob/master/Obrazki/license.PNG) ![Języki](https://github.com/AGH-Narzedzia-Informatyczne/Kebattle.Live/blob/master/Obrazki/lang.PNG)
 
 Nasz projekt to aplikacja, która ma na celu pomoc restauracjom typu Kabab - w zarządzaniu zamówieniami. W aplikacji może je stworzyć zarówno klient jak i sprzedawca. Następnie można sprawdzić stan swojego zamówienia na stronie restauracji.
 
