@@ -188,6 +188,14 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Resources\Daco_443607.png" />
+    <Content Include="Resources\Daco_444681.png" />
+    <Content Include="Resources\Daco_5453030.png" />
+    <Content Include="Resources\Daco_5457625.png" />
+    <Content Include="Resources\Daco_5460249.png" />
+    <Content Include="Resources\lang.PNG" />
+    <Content Include="Resources\license.PNG" />
+    <Content Include="Resources\version.PNG" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
