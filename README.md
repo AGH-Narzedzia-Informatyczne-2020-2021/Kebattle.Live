@@ -16,12 +16,12 @@ Zamówienia mają trzy statusy:
 
 Nazwa użytkownika | Imię
 ------------------|-----
-@klasycznienielogiczny | Piotr
-@pmalisz | Paweł
-@KamilaBaizakova | Kamila
-@andrzejmidura | Andrzej
-@Azuyuto | Mikołaj
-@palkahubert | Hubert
+[@klasycznienielogiczny](https://github.com/klasycznienielogiczny) | Piotr
+[@pmalisz](https://github.com/pmalisz) | Paweł
+[@KamilaBaizakova](https://github.com/KamilaBaizakova) | Kamila
+[@andrzejmidura](https://github.com/andrzejmidura) | Andrzej
+[@Azuyuto](https://github.com/Azuyuto) | Mikołaj
+[@palkahubert](https://github.com/palkahubert) | Hubert
 
 **TO DO** list:
 - [x] Wymyślić temat projektu
