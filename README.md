@@ -42,3 +42,5 @@ Nazwa użytkownika | Imię
 - [ ] Rozpisać i przydzielić zadania dla członów
 - [ ] Wykorzystać [git flow](https://guides.github.com/introduction/flow/) do pracy nad projektem
 - [ ] Skonfigurować projekt
+
+![Kebab](https://github.com/palkahubert/test/blob/main/kebattle%20logo.png)
