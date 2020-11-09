@@ -1,15 +1,29 @@
-# Kebattle.Live
-# Nie wiemy jeszcze co tu wpisać c:
+# Kebattle.Live ![Wersja](https://github.com/AGH-Narzedzia-Informatyczne/Kebattle.Live/blob/master/Obrazki/version.PNG) ![Licencja](https://github.com/AGH-Narzedzia-Informatyczne/Kebattle.Live/blob/master/Obrazki/license.PNG) ![Języki](https://github.com/AGH-Narzedzia-Informatyczne/Kebattle.Live/blob/master/Obrazki/lang.PNG)
+
+DEMO : http://kebattle.azurewebsites.net/
+
+Nasz projekt to aplikacja, która ma na celu pomoc restauracjom typu Kabab - w zarządzaniu zamówieniami. W aplikacji może je stworzyć zarówno klient jak i sprzedawca. Następnie można sprawdzić stan swojego zamówienia na stronie restauracji.
+
+Zamówienia mają trzy statusy:
+1. Nowe zamówienie
+2. W trakcie przygotowania
+3. Gotowe do odebrania
+
+**W czym mogłoby to pomóc?**
+> Sprzedawca zamiast używać notesu, mógłby użyć aplikacji uruchomionej np. na tablecie i stworzyć kebaba klikająć zaledwie kilka przycisków na stronie.
+
+> Klient nie musiałby podchodzić do kasy w restuauracji, by złożyć zamówienie. Mógłby to zrobić za pomocą np. telefonu (wraz z płatnością). **Wiedziałby także, kiedy zamówienie jest gotowe do odebrania.**
+
 ![Kebsik](https://i.postimg.cc/W4xyq6YM/Daco-5453030.png)
 
 Nazwa użytkownika | Imię
 ------------------|-----
-@klasycznienielogiczny | Piotr
-@pmalisz | Paweł
-@KamilaBaizakova | Kamila
-@andrzejmidura | Andrzej
-@Azuyuto | Mikołaj
-@palkahubert | Hubert
+[@klasycznienielogiczny](https://github.com/klasycznienielogiczny) | Piotr
+[@pmalisz](https://github.com/pmalisz) | Paweł
+[@KamilaBaizakova](https://github.com/KamilaBaizakova) | Kamila
+[@andrzejmidura](https://github.com/andrzejmidura) | Andrzej
+[@Azuyuto](https://github.com/Azuyuto) | Mikołaj
+[@palkahubert](https://github.com/palkahubert) | Hubert
 
 **TO DO** list:
 - [x] Wymyślić temat projektu
@@ -30,3 +44,5 @@ Nazwa użytkownika | Imię
 - [x] Rozpisać i przydzielić zadania dla członów
 - [ ] Wykorzystać [git flow](https://guides.github.com/introduction/flow/) do pracy nad projektem
 - [x] Skonfigurować projekt
+
+![Kebab](https://github.com/palkahubert/test/blob/main/kebattle%20logo.png)
