@@ -21,12 +21,12 @@ Nazwa użytkownika | Imię
 - [x] Założyć konto na [Trello](https://trello.com/)
 - [x] Dodać plik _.gitignore_
 - [x] Dodać plik __README__
-- [ ] Stworzyć zespołowy opis projektu
+- [x] Stworzyć zespołowy opis projektu
 - [x] Stworzyć __README__ na swoim profilu
 - [x] Wrzucić coś do swojego repozytorium
-- [ ] Umówić się na spotkanie za pomocą ankiety [Doodle](https://doodle.com/en/)
-	- [ ] Wysłać link do prowadzącego np. za pomocą [Google Calendar](https://calendar.google.com/)
-- [ ] Dodać informację o licencji do README
-- [ ] Rozpisać i przydzielić zadania dla członów
+- [x] Umówić się na spotkanie za pomocą ankiety [Doodle](https://doodle.com/en/)
+	- [x] Wysłać link do prowadzącego np. za pomocą [Google Calendar](https://calendar.google.com/)
+- [x] Dodać informację o licencji do README
+- [x] Rozpisać i przydzielić zadania dla członów
 - [ ] Wykorzystać [git flow](https://guides.github.com/introduction/flow/) do pracy nad projektem
-- [ ] Skonfigurować projekt
+- [x] Skonfigurować projekt
