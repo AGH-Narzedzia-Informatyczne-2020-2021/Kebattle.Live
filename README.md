@@ -1,5 +1,7 @@
 # Kebattle.Live ![Wersja](https://github.com/AGH-Narzedzia-Informatyczne/Kebattle.Live/blob/master/Obrazki/version.PNG) ![Licencja](https://github.com/AGH-Narzedzia-Informatyczne/Kebattle.Live/blob/master/Obrazki/license.PNG) ![Języki](https://github.com/AGH-Narzedzia-Informatyczne/Kebattle.Live/blob/master/Obrazki/lang.PNG)
 
+DEMO : http://kebattle.azurewebsites.net/
+
 Nasz projekt to aplikacja, która ma na celu pomoc restauracjom typu Kabab - w zarządzaniu zamówieniami. W aplikacji może je stworzyć zarówno klient jak i sprzedawca. Następnie można sprawdzić stan swojego zamówienia na stronie restauracji.
 
 Zamówienia mają trzy statusy:
@@ -36,11 +38,11 @@ Nazwa użytkownika | Imię
 - [x] Stworzyć zespołowy opis projektu
 - [x] Stworzyć __README__ na swoim profilu
 - [x] Wrzucić coś do swojego repozytorium
-- [ ] Umówić się na spotkanie za pomocą ankiety [Doodle](https://doodle.com/en/)
-	- [ ] Wysłać link do prowadzącego np. za pomocą [Google Calendar](https://calendar.google.com/)
-- [ ] Dodać informację o licencji do README
-- [ ] Rozpisać i przydzielić zadania dla członów
+- [x] Umówić się na spotkanie za pomocą ankiety [Doodle](https://doodle.com/en/)
+	- [x] Wysłać link do prowadzącego np. za pomocą [Google Calendar](https://calendar.google.com/)
+- [x] Dodać informację o licencji do README
+- [x] Rozpisać i przydzielić zadania dla członów
 - [ ] Wykorzystać [git flow](https://guides.github.com/introduction/flow/) do pracy nad projektem
-- [ ] Skonfigurować projekt
+- [x] Skonfigurować projekt
 
 ![Kebab](https://github.com/palkahubert/test/blob/main/kebattle%20logo.png)
