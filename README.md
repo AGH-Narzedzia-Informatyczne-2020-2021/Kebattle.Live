@@ -83,3 +83,11 @@ Linijka 2 do testowania funkcjonalności rozwiązywania konfliktów
 
 Linijka 3 do testowania funkcjonalności rozwiązywania konfliktów
 
+
+
+
+
+Linijkkonflikta 2 do teskonflikttowania funkcjonalkonfliktntestości rozwiązywania konfkonfliktliktów
+
+
+
