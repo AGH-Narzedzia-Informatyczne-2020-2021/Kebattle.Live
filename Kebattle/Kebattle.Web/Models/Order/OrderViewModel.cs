@@ -8,6 +8,30 @@ namespace Kebattle.Web.Models.Order
 {
     public class OrderViewModel
     {
+        public OrderViewModel()
+        {
+            KebabTypes = new List<SelectListItem>();
+            SauceTypes = new List<SelectListItem>();
+            MeatTypes = new List<SelectListItem>();
+        }
+
+        public OrderViewModel(DomainModel.Order order)
+        {
+            ID = order.Id;
+            CompanyID = order.CompanyId;
+            Name = order.Name;
+            KebabTypeID = order.KebabTypeId;
+            SouceTypeID = order.SauceTypeId;
+            MeatTypeID = order.MeatTypeId;
+            Notes = order.Notes;
+            DateAdded = order.DateAdded;
+            DateUpdated = order.DateUpdated;
+            AddedBy = order.AddedBy;
+            AddedByName = "";
+            UpdatedBy = order.UpdatedBy;
+            UpdatedByName = "";
+        }
+
         public int ID { get; set; }
         public int CompanyID { get; set; }
         public string Name { get; set; }
@@ -22,8 +46,7 @@ namespace Kebattle.Web.Models.Order
         public DateTime? DateUpdated { get; set; }
         public int AddedBy { get; set; }
         public string AddedByName { get; set; }
-        public int UpdatedBy { get; set; }
+        public int? UpdatedBy { get; set; }
         public string UpdatedByName { get; set; }
-
     }
 }

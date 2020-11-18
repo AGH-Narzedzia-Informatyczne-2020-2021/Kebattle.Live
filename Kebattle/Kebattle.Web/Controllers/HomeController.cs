@@ -16,7 +16,7 @@ namespace Kebattle.Web.Controllers
         }
         public ActionResult Index()
         {
-            var orders = _orderRepository.GetByCompanyID(1);
+            var orders = _orderRepository.GetByCompanyId(1);
             return View(orders);
         }
 

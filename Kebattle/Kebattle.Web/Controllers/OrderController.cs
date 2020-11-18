@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Kebattle.Interfaces.Repositories;
+using Kebattle.Web.Models.Order;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,15 +10,25 @@ namespace Kebattle.Web.Controllers
 {
     public class OrderController : Controller
     {
-        // GET: Order
-        public ActionResult Index()
+        private readonly IOrderRepository _orderRepository;
+        public OrderController(IOrderRepository orderRepository)
         {
-            return View();
+            _orderRepository = orderRepository;
         }
 
-        // GET: Order/Details/5
-        public ActionResult Details(int id)
+        // GET: Order/Index/[id]
+        public ActionResult Index(int id)
         {
+            var orders = _orderRepository.GetByCompanyId(id);
+            var model = new OrdersListViewModel(orders);
+            return View(model);
+        }
+
+        // GET: Order/Details/[id]
+        public ActionResult View(int id)
+        {
+            var order = _orderRepository.GetOrder(id);
+            var model = new OrderViewModel(order);
             return View();
         }
 
@@ -42,13 +54,13 @@ namespace Kebattle.Web.Controllers
             }
         }
 
-        // GET: Order/Edit/5
+        // GET: Order/Edit/[id]
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Order/Edit/5
+        // POST: Order/Edit/[id]
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -64,13 +76,13 @@ namespace Kebattle.Web.Controllers
             }
         }
 
-        // GET: Order/Delete/5
+        // GET: Order/Delete/[id]
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Order/Delete/5
+        // POST: Order/Delete/[id]
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

@@ -1,11 +1,8 @@
 ﻿using Kebattle.DomainModel;
 using Kebattle.Interfaces.Generics;
 using Kebattle.Interfaces.Repositories;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Kebattle.Repositories.Implementation
 {
@@ -17,9 +14,24 @@ namespace Kebattle.Repositories.Implementation
             db = (DataContext) as MyDbContext;
         }
 
-        public List<Order> GetByCompanyID(int companyID)
+        public List<Order> GetByCompanyId(int companyId)
         {
-            return GetAll().ToList();
+            return GetMany(a => a.CompanyId == companyId).ToList();
+        }
+
+        public Order GetOrder(int orderId)
+        {
+            return GetById(orderId);
+        }
+
+        public void SaveOrder(Order order)
+        {
+            if(order.Id == 0)
+                Add(order);
+            else
+                Update(order);
+
+            SaveChanges();
         }
     }
 }
