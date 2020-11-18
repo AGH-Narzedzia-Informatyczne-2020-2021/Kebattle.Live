@@ -1,5 +1,4 @@
-﻿@model List<Kebattle.DomainModel.Order>
-@{
+﻿@{
     ViewBag.Title = "Home Page";
 }
 
@@ -21,13 +20,13 @@
             </thead>
             <tbody>
                 <tr>
-                    @foreach(var item in Model)
+                    @*@foreach(var item in Model)
                     {
                         <tr>
                             <td>@item.Id</td>
                             <td>@item.DateAdded.ToShortDateString()</td>
                         </tr>
-                    }
+                    }*@
                 </tr>
             </tbody>
         </table>

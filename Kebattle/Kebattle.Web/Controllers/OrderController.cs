@@ -29,22 +29,25 @@ namespace Kebattle.Web.Controllers
         {
             var order = _orderRepository.GetOrder(id);
             var model = new OrderViewModel(order);
-            return View();
+            return View(model);
         }
 
         // GET: Order/Create
         public ActionResult Create()
         {
-            return View();
+            var model = new OrderViewModel();
+            model.Initialize(_orderRepository);
+
+            return View(model);
         }
 
         // POST: Order/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(OrderViewModel order)
         {
             try
             {
-                // TODO: Add insert logic here
+                _orderRepository.SaveOrder(order.ToOrder());
 
                 return RedirectToAction("Index");
             }
@@ -57,16 +60,20 @@ namespace Kebattle.Web.Controllers
         // GET: Order/Edit/[id]
         public ActionResult Edit(int id)
         {
+            var order = _orderRepository.GetOrder(id);
+            var model = new OrderViewModel(order);
+            model.Initialize(_orderRepository);
+
             return View();
         }
 
         // POST: Order/Edit/[id]
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(OrderViewModel order)
         {
             try
             {
-                // TODO: Add update logic here
+                _orderRepository.SaveOrder(order.ToOrder());
 
                 return RedirectToAction("Index");
             }
@@ -74,12 +81,6 @@ namespace Kebattle.Web.Controllers
             {
                 return View();
             }
-        }
-
-        // GET: Order/Delete/[id]
-        public ActionResult Delete(int id)
-        {
-            return View();
         }
 
         // POST: Order/Delete/[id]
@@ -88,13 +89,13 @@ namespace Kebattle.Web.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
+                _orderRepository.DeleteOrder(id);
 
-                return RedirectToAction("Index");
+                return Json("Zamówienie usunięte");
             }
             catch
             {
-                return View();
+                return Json("Coś poszło nie tak!");
             }
         }
     }
