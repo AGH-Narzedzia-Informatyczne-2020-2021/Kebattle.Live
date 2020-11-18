@@ -77,3 +77,5 @@ Nazwa użytkownika | Gist :hash::one: | Gist :hash::two: | Dodatkowe informacje 
 Linijka do testowania funkcjonalności rozwiązywania konfliktów
 
 Linijka 2 do testowania funkcjonalności rozwiązywania konfliktów
+
+Linijka 3 do testowania funkcjonalności rozwiązywania konfliktów
