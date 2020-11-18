@@ -73,6 +73,5 @@ Nazwa użytkownika | Gist :hash::one: | Gist :hash::two: | Dodatkowe informacje 
 
 ![Kebab](https://github.com/palkahubert/test/blob/main/kebattle%20logo.png)
 
-Linijka konflikt do  funkcjonalności rokonfliktzwiązywasdasania konfliktkonfliktów
+Ostatni konflikt rozwiązany <3
 
- 2 do  funkcjonalkonfliktntestości rozwiązywania 
