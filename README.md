@@ -74,6 +74,6 @@ Nazwa użytkownika | Gist :hash::one: | Gist :hash::two: | Dodatkowe informacje 
 ![Kebab](https://github.com/palkahubert/test/blob/main/kebattle%20logo.png)
 
 
-Linijka do testowania funkcjonalności rozwiązywania konfliktów
+Linijka do testowania funkcjonalności rozwiązywania konfliktów testowanie 
 
 Linijka 2 do testowania funkcjonalności rozwiązywania konfliktów
