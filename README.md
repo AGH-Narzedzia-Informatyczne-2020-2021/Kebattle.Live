@@ -48,4 +48,5 @@ Nazwa użytkownika | Imię
 ![Kebab](https://github.com/palkahubert/test/blob/main/kebattle%20logo.png)
 
 Linijka do testowania funkcjonalności rozwiązywania konfliktów
+
 Linijka 2 do testowania funkcjonalności rozwiązywania konfliktów
