@@ -14,6 +14,6 @@ namespace Kebattle.Web.Models.Order
             Orders = orders;
         }
 
-        public List<DomainModel.Order> Orders;
+        public List<DomainModel.Order> Orders { get; set; }
     }
 }

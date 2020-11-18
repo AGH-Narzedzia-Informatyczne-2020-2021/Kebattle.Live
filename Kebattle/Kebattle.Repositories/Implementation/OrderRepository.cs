@@ -33,27 +33,5 @@ namespace Kebattle.Repositories.Implementation
 
             SaveChanges();
         }
-
-        public void DeleteOrder(int id)
-        {
-            var order = GetById(id);
-
-            Delete(order);
-        }
-
-        public List<SauceType> GetSauceTypes()
-        {
-            return db.SauceTypes.ToList();
-        }
-
-        public List<KebabType> GetKebabTypes()
-        {
-            return db.KebabTypes.ToList();
-        }
-
-        public List<MeatType> GetMeatTypes()
-        {
-            return db.MeatTypes.ToList();
-        }
     }
 }
