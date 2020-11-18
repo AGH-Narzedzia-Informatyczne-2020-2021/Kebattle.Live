@@ -76,3 +76,10 @@ Nazwa użytkownika | Gist :hash::one: | Gist :hash::two: | Dodatkowe informacje 
 Linijka konflikt do tesakonfliktsdtowaniakonflikt funkcjonalności rokonfliktzwiązywasdasania konfliktkonfliktów
 Linijkkonflikta 2 do teskonflikttowania funkcjonalkonfliktntestości rozwiązywania konfkonfliktliktówciach
 
+
+Linijka do testowania funkcjonalności rozwiązywania konfliktów
+
+Linijka 2 do testowania funkcjonalności rozwiązywania konfliktów
+
+Linijka 3 do testowania funkcjonalności rozwiązywania konfliktów
+
