@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kebattle.Interfaces.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +9,15 @@ namespace Kebattle.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IOrderRepository _orderRepository;
+        public HomeController(IOrderRepository orderRepository)
+        {
+            _orderRepository = orderRepository;
+        }
         public ActionResult Index()
         {
-            return View();
+            var orders = _orderRepository.GetByCompanyID(1);
+            return View(orders);
         }
 
         public ActionResult About()
