@@ -64,7 +64,7 @@ Nazwa użytkownika | Imię
 Nazwa użytkownika | Gist :hash::one: | Gist :hash::two: | Dodatkowe informacje :information_source:
 ------------------|------------------|------------------|-------------------------------
 [@klasycznienielogiczny](https://github.com/klasycznienielogiczny) | :question: | | :put_litter_in_its_place:
-[@pmalisz](https://github.com/pmalisz) | :question: | :grey_question: | :put_litter_in_its_place:
+[@pmalisz](https://github.com/pmalisz) | [Publiczny](https://gist.github.com/pmalisz/7ddb879d79da5c4708a7da0e5434f34a) | [Sekretny](https://gist.github.com/pmalisz/769e368ff406f25d1bcc4199db37a75c) | :put_litter_in_its_place:
 [@KamilaBaizakova](https://github.com/KamilaBaizakova) | :question: | :grey_question: | :put_litter_in_its_place:
 [@andrzejmidura](https://github.com/andrzejmidura) | :question: | :grey_question: | :put_litter_in_its_place:
 [@Azuyuto](https://github.com/Azuyuto) | :question: | :grey_question: | :put_litter_in_its_place:
