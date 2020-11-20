@@ -1,4 +1,5 @@
 ﻿using Kebattle.Interfaces.Repositories;
+using Kebattle.Web.Helpers;
 using Kebattle.Web.Models.Order;
 using System;
 using System.Collections.Generic;
@@ -16,15 +17,16 @@ namespace Kebattle.Web.Controllers
             _orderRepository = orderRepository;
         }
 
-        // GET: Order/Index/[id]
-        public ActionResult Index(int id)
+        public ActionResult Index(int companyID)
         {
-            var orders = _orderRepository.GetByCompanyId(id);
-            var model = new OrdersListViewModel(orders);
+            var orders = _orderRepository.GetByCompanyId(companyID);
+            var model = new OrdersListViewModel(orders)
+            {
+                CompanyID = companyID
+            };
             return View(model);
         }
 
-        // GET: Order/Details/[id]
         public ActionResult View(int id)
         {
             var order = _orderRepository.GetOrder(id);
@@ -32,58 +34,40 @@ namespace Kebattle.Web.Controllers
             return View(model);
         }
 
-        // GET: Order/Create
-        public ActionResult Create()
+        public ActionResult Create(int companyID)
         {
-            var model = new OrderViewModel();
+            var model = new OrderViewModel()
+            {
+                CompanyId = companyID
+            };
             model.Initialize(_orderRepository);
 
             return View(model);
         }
 
-        // POST: Order/Create
         [HttpPost]
-        public ActionResult Create(OrderViewModel order)
+        public ActionResult Save(OrderViewModel order)
         {
-            try
+            order.AddedBy = SessionHelper.GetUserId();
+
+            if (ModelState.IsValid)
             {
                 _orderRepository.SaveOrder(order.ToOrder());
-
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { companyID = order.CompanyId });
             }
-            catch
-            {
-                return View();
-            }
+            order.Initialize(_orderRepository);
+            return View(order.Id == 0 ? "Create" : "Edit", order);
         }
 
-        // GET: Order/Edit/[id]
         public ActionResult Edit(int id)
         {
             var order = _orderRepository.GetOrder(id);
             var model = new OrderViewModel(order);
             model.Initialize(_orderRepository);
 
-            return View();
+            return View(model);
         }
 
-        // POST: Order/Edit/[id]
-        [HttpPost]
-        public ActionResult Edit(OrderViewModel order)
-        {
-            try
-            {
-                _orderRepository.SaveOrder(order.ToOrder());
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // POST: Order/Delete/[id]
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
@@ -91,7 +75,7 @@ namespace Kebattle.Web.Controllers
             {
                 _orderRepository.DeleteOrder(id);
 
-                return Json("Zamówienie usunięte");
+                return Json("Zamówienie usunięte!");
             }
             catch
             {

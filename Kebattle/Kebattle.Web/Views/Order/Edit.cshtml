@@ -1,0 +1,10 @@
+﻿@model Kebattle.Web.Models.Order.OrderViewModel
+
+@{
+    ViewBag.Title = "OrderForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Edycja zamówienia</h3>
+
+@Html.Partial("_Form", Model)

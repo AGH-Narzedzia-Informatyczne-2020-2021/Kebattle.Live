@@ -1,0 +1,25 @@
+﻿@model Kebattle.Web.Models.Company.CompaniesListViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Dostępne firmy</h2>
+<hr />
+<div class="row">
+    @foreach (var item in Model.Companies)
+    {
+    <div class="col-md-4">
+        <div class="card">
+            <img class="card-img-top" alt="Zdjęcie kebaba" src="~/Resources/uszwagra.jpg" data-holder-rendered="true" style="height: 180px; width: 100%; display: block;object-fit: cover;">
+            <div class="card-body">
+                <h5 class="card-title">@item.Name</h5>
+                <p class="card-text"><a href="/Order/Index?companyID=@item.Id">Sprawdź zamówienia</a></p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Ostatnie zamówienie: @Html.Raw(item.Orders.Any() ? item.Orders.Max(a => a.DateAdded).ToShortDateString() : "brak zamówień")</small>
+            </div>
+        </div>
+    </div>
+    }
+</div>

@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Kebattle.Web.Models;
+using Kebattle.Web.Helpers;
 
 namespace Kebattle.Web.Controllers
 {
@@ -79,6 +80,7 @@ namespace Kebattle.Web.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    SessionHelper.SetUserAndOtherDetails(model.Email);
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");

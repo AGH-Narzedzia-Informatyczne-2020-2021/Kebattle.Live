@@ -29,7 +29,11 @@ namespace Kebattle.Repositories.Implementation
             if(order.Id == 0)
                 Add(order);
             else
+            {
+                order.DateUpdated = order.DateAdded;
+                order.UpdatedBy = order.AddedBy;
                 Update(order);
+            }
 
             SaveChanges();
         }
@@ -39,6 +43,7 @@ namespace Kebattle.Repositories.Implementation
             var order = GetById(id);
 
             Delete(order);
+            SaveChanges();
         }
 
         public List<SauceType> GetSauceTypes()
@@ -54,6 +59,11 @@ namespace Kebattle.Repositories.Implementation
         public List<MeatType> GetMeatTypes()
         {
             return db.MeatTypes.ToList();
+        }
+
+        public List<KebabSize> GetKebabSizes()
+        {
+            return db.KebabSizes.ToList();
         }
     }
 }

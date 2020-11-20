@@ -1,0 +1,30 @@
+﻿@model Kebattle.Web.Models.Order.OrderViewModel
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label font-weight-bold" }): @Html.Raw(Model.Name)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.KebabTypeId, new { @class = "control-label font-weight-bold" }): @Html.Raw(Model.KebabType)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.SauceTypeId, new { @class = "control-label font-weight-bold" }): @Html.Raw(Model.SauceType)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.MeatTypeId, new { @class = "control-label font-weight-bold" }): @Html.Raw(Model.MeatType)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.KebabSizeId, new { @class = "control-label font-weight-bold" }): @Html.Raw(Model.KebabSize)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Notes, new { @class = "control-label font-weight-bold" }): @Html.Raw(Model.Notes)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.AddedByName, new { @class = "control-label font-weight-bold" }): @Html.Raw(Model.AddedByName)
+        </div>
+        <hr />
+    </div>
+
+<div>
+    @Html.ActionLink("Wróć do listy zamówień", "Index", new { companyID = Model.CompanyId })
+</div>

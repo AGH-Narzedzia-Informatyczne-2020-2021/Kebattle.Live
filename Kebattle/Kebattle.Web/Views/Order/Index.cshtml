@@ -5,36 +5,56 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<a href="/Order/Create?companyID=@Model.CompanyID" class="btn btn-success pull-right">Dodaj nowe</a>
 <h2>Lista zamówień</h2>
-
-<table class="table">
+<table id="myTable" class="table">
     <thead>
         <tr>
             <th>Id</th>
             <th>Nazwa</th>
-            <th>Rodzaj kebaba</th>
-            <th>Rodzaj sosu</th>
-            <th>Typ mięsa</th>
+            <th>Rodzaj</th>
+            <th>Sos</th>
+            <th>Mięso</th>
+            <th>Rozmiar</th>
             <th>Dodatkowe informacje</th>
             <th>Data dodania</th>
-            <th>Dodane przez</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.Orders)
         {
-            <tr>
+            <tr id="r_@item.Id">
                 <td>@item.Id</td>
                 <td>@item.Name</td>
-                <td>@item.KebabTypeId</td>
-                <td>@item.SauceTypeId</td>
-                <td>@item.MeatTypeId</td>
+                <td>@item.KebabType</td>
+                <td>@item.SauceType</td>
+                <td>@item.MeatType</td>
+                <td>@item.KebabSize</td>
                 <td>@item.Notes</td>
-                <td>@item.DateAdded.ToShortDateString()</td>
-                <td>@item.AddedBy</td>
-                <td><a href="/Order/View?id=@item.Id" class="text-primary"><i class="fa fa-info"></i></a></td>
+                <td>@item.DateAdded.Value.ToString("dd-MM-yyyy")</td>
+                <td>
+                    <a href="/Order/View?id=@item.Id" class="text-info"><i class="fa fa-info"></i></a>
+                    <a href="/Order/Edit?id=@item.Id" class="text-primary"><i class="fa fa-edit"></i></a>
+                    <a href="javascript:deleteOrder(@item.Id)" class="text-danger"><i class="fa fa-times"></i></a>
+                </td>
             </tr>
         }
     </tbody>
 </table>
 
+<script>
+    function deleteOrder(orderID) {
+        $.ajax({
+            url: "/Order/Delete",
+            data: {
+                id: orderID
+            },
+            type: "POST",
+            success: function (json) {
+                $("#r_" + orderID).remove();
+                alert(json);
+            }
+        })
+    }
+</script>
