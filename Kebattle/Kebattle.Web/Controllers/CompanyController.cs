@@ -22,5 +22,17 @@ namespace Kebattle.Web.Controllers
             var vm = new CompaniesListViewModel(_companyRepository.GetAll().ToList());
             return View(vm);
         }
+
+        public ActionResult Statistics(int companyId)
+        {
+            
+            return View();
+        }
+
+        public ActionResult Settings(int companyId)
+        {
+
+            return View();
+        }
     }
 }
