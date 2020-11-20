@@ -394,6 +394,7 @@ namespace Kebattle.Web.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            SessionHelper.ClearUser();
             return RedirectToAction("Index", "Home");
         }
 
