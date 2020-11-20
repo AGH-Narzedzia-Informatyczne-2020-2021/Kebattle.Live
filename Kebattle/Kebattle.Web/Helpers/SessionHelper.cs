@@ -19,7 +19,7 @@ namespace Kebattle.Web.Helpers
         {
             ClearUser();
             var aspNetUserRepository = DependencyResolver.Current.GetService<AspNetUserRepository>();
-            var user = aspNetUserRepository.GetUserByEmail(userName);
+            var user = aspNetUserRepository.GetUserByEmailForSession(userName);
             HttpContext.Current.Session.Add(CURRENT_USER, user);
         }
 

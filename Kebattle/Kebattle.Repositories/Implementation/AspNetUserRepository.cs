@@ -3,6 +3,7 @@ using Kebattle.Interfaces.Generics;
 using Kebattle.Interfaces.Repositories;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 
 namespace Kebattle.Repositories.Implementation
 {
@@ -17,6 +18,11 @@ namespace Kebattle.Repositories.Implementation
         public AspNetUser GetUserByEmail(string email)
         {
             return Get(p => p.UserName == email);
+        }
+
+        public AspNetUser GetUserByEmailForSession(string email)
+        {
+            return db.AspNetUsers.Include(a => a.Companies).FirstOrDefault(a => a.UserName == email);
         }
     }
 }
