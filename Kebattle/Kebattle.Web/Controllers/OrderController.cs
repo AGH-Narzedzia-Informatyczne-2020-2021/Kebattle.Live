@@ -17,12 +17,12 @@ namespace Kebattle.Web.Controllers
             _orderRepository = orderRepository;
         }
 
-        public ActionResult Index(int companyID)
+        public ActionResult Index(int companyId)
         {
-            var orders = _orderRepository.GetByCompanyId(companyID);
+            var orders = _orderRepository.GetByCompanyId(companyId);
             var model = new OrdersListViewModel(orders)
             {
-                CompanyID = companyID
+                CompanyId = companyId
             };
             return View(model);
         }
@@ -34,11 +34,11 @@ namespace Kebattle.Web.Controllers
             return View(model);
         }
 
-        public ActionResult Create(int companyID)
+        public ActionResult Create(int companyId)
         {
             var model = new OrderViewModel()
             {
-                CompanyId = companyID
+                CompanyId = companyId
             };
             model.Initialize(_orderRepository);
 

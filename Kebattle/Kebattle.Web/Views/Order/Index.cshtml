@@ -2,10 +2,9 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<a href="/Order/Create?companyID=@Model.CompanyID" class="btn btn-success pull-right">Dodaj nowe</a>
+<a href="/Order/Create?companyID=@Model.CompanyId" class="btn btn-success pull-right">Dodaj nowe</a>
 <h2>Lista zamówień</h2>
 <table id="myTable" class="table">
     <thead>

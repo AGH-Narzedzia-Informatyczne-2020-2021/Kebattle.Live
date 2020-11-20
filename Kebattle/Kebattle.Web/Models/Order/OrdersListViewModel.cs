@@ -4,7 +4,7 @@ namespace Kebattle.Web.Models.Order
 {
     public class OrdersListViewModel
     {
-        public int CompanyID { get; set; }
+        public int CompanyId { get; set; }
         public OrdersListViewModel()
         {
             Orders = new List<OrderViewModel>();
