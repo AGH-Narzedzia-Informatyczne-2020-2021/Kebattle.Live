@@ -10,12 +10,15 @@
 
 ## Opis projektu
 
-Nasz projekt to aplikacja, która ma na celu pomoc restauracjom typu Kabab - w zarządzaniu zamówieniami. W aplikacji może je stworzyć zarówno klient jak i sprzedawca. Następnie można sprawdzić stan swojego zamówienia na stronie restauracji.
+Nasz projekt to aplikacja, która ma na celu pomóc restauracjom typu Kabab w zarządzaniu zamówieniami. W aplikacji może je stworzyć zarówno klient jak i sprzedawca. Następnie można sprawdzić stan swojego zamówienia na stronie restauracji.
 
 Zamówienia mają trzy statusy:
 1. Nowe zamówienie
+   - Zamówienie zostało złożone i poprawnie zarejestrowane w systemie. 
 2. W trakcie przygotowania
+   - Zamówienie zostało przekazane do realizacji i jest na etapie przygotowywania
 3. Gotowe do odebrania
+   - Zamówienie zostało wykonane i oczekuje na odbiór przez klienta
 
 **W czym mogłoby to pomóc?**
 > Sprzedawca zamiast używać notesu, mógłby użyć aplikacji uruchomionej np. na tablecie i stworzyć kebaba klikająć zaledwie kilka przycisków na stronie.
@@ -56,8 +59,9 @@ Nazwa użytkownika | Imię
 	- [x] Wysłać link do prowadzącego np. za pomocą [Google Calendar](https://calendar.google.com/)
 - [x] Dodać informację o licencji do README
 - [x] Rozpisać i przydzielić zadania dla członów
-- [ ] Wykorzystać [git flow](https://guides.github.com/introduction/flow/) do pracy nad projektem
+- [x] Wykorzystać [git flow](https://guides.github.com/introduction/flow/) do pracy nad projektem
 - [x] Skonfigurować projekt
+- [x] **Bieżące aktualizacje można znaleźć na Trello/githubie/Slacku**
 
 ## Gisty
 
@@ -70,8 +74,6 @@ Nazwa użytkownika | Gist :hash::one: | Gist :hash::two: | Dodatkowe informacje 
 [@Azuyuto](https://github.com/Azuyuto) | :question: | :grey_question: | :put_litter_in_its_place:
 [@palkahubert](https://github.com/palkahubert) | :question: | :grey_question: | :put_litter_in_its_place:
 
-
 ![Kebab](https://github.com/palkahubert/test/blob/main/kebattle%20logo.png)
 
 Ostatni konflikt rozwiązany <3
-
