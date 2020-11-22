@@ -69,6 +69,8 @@ namespace Kebattle.Web.App_Start
 
             // Repositories
             kernel.Bind<IOrderRepository>().To<OrderRepository>().InRequestScope();
+            kernel.Bind<ICompanyRepository>().To<CompanyRepository>().InRequestScope();
+            kernel.Bind<IAspNetUserRepository>().To<AspNetUserRepository>().InRequestScope();
         }
     }
 }

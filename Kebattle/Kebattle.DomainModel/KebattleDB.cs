@@ -37,15 +37,15 @@ namespace Kebattle.DomainModel
 
     public interface IMyDbContext : IDisposable
     {
-        DbSet<AspNetRole> AspNetRoles { get; set; } // AspNetRoles
         DbSet<AspNetUser> AspNetUsers { get; set; } // AspNetUsers
-        DbSet<AspNetUserClaim> AspNetUserClaims { get; set; } // AspNetUserClaims
-        DbSet<AspNetUserLogin> AspNetUserLogins { get; set; } // AspNetUserLogins
         DbSet<AspNetUserRole> AspNetUserRoles { get; set; } // AspNetUserRoles
-        DbSet<KebabType> KebabTypes { get; set; } // KebabType
-        DbSet<MeatType> MeatTypes { get; set; } // MeatType
+        DbSet<CompaniesPrice> CompaniesPrices { get; set; } // Companies_Prices
+        DbSet<Company> Companies { get; set; } // Companies
+        DbSet<KebabSize> KebabSizes { get; set; } // KebabSizes
+        DbSet<KebabType> KebabTypes { get; set; } // KebabTypes
+        DbSet<MeatType> MeatTypes { get; set; } // MeatTypes
         DbSet<Order> Orders { get; set; } // Orders
-        DbSet<SauceType> SauceTypes { get; set; } // SauceType
+        DbSet<SauceType> SauceTypes { get; set; } // SauceTypes
         DbSet<sys_DatabaseFirewallRule> sys_DatabaseFirewallRules { get; set; } // database_firewall_rules
 
         int SaveChanges();
@@ -97,15 +97,15 @@ namespace Kebattle.DomainModel
 
     public class MyDbContext : DbContext, IMyDbContext
     {
-        public DbSet<AspNetRole> AspNetRoles { get; set; } // AspNetRoles
         public DbSet<AspNetUser> AspNetUsers { get; set; } // AspNetUsers
-        public DbSet<AspNetUserClaim> AspNetUserClaims { get; set; } // AspNetUserClaims
-        public DbSet<AspNetUserLogin> AspNetUserLogins { get; set; } // AspNetUserLogins
         public DbSet<AspNetUserRole> AspNetUserRoles { get; set; } // AspNetUserRoles
-        public DbSet<KebabType> KebabTypes { get; set; } // KebabType
-        public DbSet<MeatType> MeatTypes { get; set; } // MeatType
+        public DbSet<CompaniesPrice> CompaniesPrices { get; set; } // Companies_Prices
+        public DbSet<Company> Companies { get; set; } // Companies
+        public DbSet<KebabSize> KebabSizes { get; set; } // KebabSizes
+        public DbSet<KebabType> KebabTypes { get; set; } // KebabTypes
+        public DbSet<MeatType> MeatTypes { get; set; } // MeatTypes
         public DbSet<Order> Orders { get; set; } // Orders
-        public DbSet<SauceType> SauceTypes { get; set; } // SauceType
+        public DbSet<SauceType> SauceTypes { get; set; } // SauceTypes
         public DbSet<sys_DatabaseFirewallRule> sys_DatabaseFirewallRules { get; set; } // database_firewall_rules
 
         static MyDbContext()
@@ -167,11 +167,11 @@ namespace Kebattle.DomainModel
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Configurations.Add(new AspNetRoleConfiguration());
             modelBuilder.Configurations.Add(new AspNetUserConfiguration());
-            modelBuilder.Configurations.Add(new AspNetUserClaimConfiguration());
-            modelBuilder.Configurations.Add(new AspNetUserLoginConfiguration());
             modelBuilder.Configurations.Add(new AspNetUserRoleConfiguration());
+            modelBuilder.Configurations.Add(new CompaniesPriceConfiguration());
+            modelBuilder.Configurations.Add(new CompanyConfiguration());
+            modelBuilder.Configurations.Add(new KebabSizeConfiguration());
             modelBuilder.Configurations.Add(new KebabTypeConfiguration());
             modelBuilder.Configurations.Add(new MeatTypeConfiguration());
             modelBuilder.Configurations.Add(new OrderConfiguration());
@@ -181,11 +181,11 @@ namespace Kebattle.DomainModel
 
         public static DbModelBuilder CreateModel(DbModelBuilder modelBuilder, string schema)
         {
-            modelBuilder.Configurations.Add(new AspNetRoleConfiguration(schema));
             modelBuilder.Configurations.Add(new AspNetUserConfiguration(schema));
-            modelBuilder.Configurations.Add(new AspNetUserClaimConfiguration(schema));
-            modelBuilder.Configurations.Add(new AspNetUserLoginConfiguration(schema));
             modelBuilder.Configurations.Add(new AspNetUserRoleConfiguration(schema));
+            modelBuilder.Configurations.Add(new CompaniesPriceConfiguration(schema));
+            modelBuilder.Configurations.Add(new CompanyConfiguration(schema));
+            modelBuilder.Configurations.Add(new KebabSizeConfiguration(schema));
             modelBuilder.Configurations.Add(new KebabTypeConfiguration(schema));
             modelBuilder.Configurations.Add(new MeatTypeConfiguration(schema));
             modelBuilder.Configurations.Add(new OrderConfiguration(schema));
@@ -399,15 +399,15 @@ namespace Kebattle.DomainModel
 
     public class FakeMyDbContext : IMyDbContext
     {
-        public DbSet<AspNetRole> AspNetRoles { get; set; } // AspNetRoles
         public DbSet<AspNetUser> AspNetUsers { get; set; } // AspNetUsers
-        public DbSet<AspNetUserClaim> AspNetUserClaims { get; set; } // AspNetUserClaims
-        public DbSet<AspNetUserLogin> AspNetUserLogins { get; set; } // AspNetUserLogins
         public DbSet<AspNetUserRole> AspNetUserRoles { get; set; } // AspNetUserRoles
-        public DbSet<KebabType> KebabTypes { get; set; } // KebabType
-        public DbSet<MeatType> MeatTypes { get; set; } // MeatType
+        public DbSet<CompaniesPrice> CompaniesPrices { get; set; } // Companies_Prices
+        public DbSet<Company> Companies { get; set; } // Companies
+        public DbSet<KebabSize> KebabSizes { get; set; } // KebabSizes
+        public DbSet<KebabType> KebabTypes { get; set; } // KebabTypes
+        public DbSet<MeatType> MeatTypes { get; set; } // MeatTypes
         public DbSet<Order> Orders { get; set; } // Orders
-        public DbSet<SauceType> SauceTypes { get; set; } // SauceType
+        public DbSet<SauceType> SauceTypes { get; set; } // SauceTypes
         public DbSet<sys_DatabaseFirewallRule> sys_DatabaseFirewallRules { get; set; } // database_firewall_rules
 
         public FakeMyDbContext()
@@ -416,11 +416,11 @@ namespace Kebattle.DomainModel
             _configuration = null;
             _database = null;
 
-            AspNetRoles = new FakeDbSet<AspNetRole>("Id", "Name");
-            AspNetUsers = new FakeDbSet<AspNetUser>("Id", "EmailConfirmed", "PhoneNumberConfirmed", "TwoFactorEnabled", "LockoutEnabled", "AccessFailedCount", "UserName");
-            AspNetUserClaims = new FakeDbSet<AspNetUserClaim>("Id", "UserId");
-            AspNetUserLogins = new FakeDbSet<AspNetUserLogin>("LoginProvider", "ProviderKey", "UserId");
+            AspNetUsers = new FakeDbSet<AspNetUser>("Id");
             AspNetUserRoles = new FakeDbSet<AspNetUserRole>("UserId", "RoleId");
+            CompaniesPrices = new FakeDbSet<CompaniesPrice>("Id");
+            Companies = new FakeDbSet<Company>("Id");
+            KebabSizes = new FakeDbSet<KebabSize>("Id");
             KebabTypes = new FakeDbSet<KebabType>("Id");
             MeatTypes = new FakeDbSet<MeatType>("Id");
             Orders = new FakeDbSet<Order>("Id");
@@ -843,45 +843,45 @@ namespace Kebattle.DomainModel
     // This is not a commercial licence, therefore only a few tables/views/stored procedures are generated.
     // ****************************************************************************************************
 
-    // AspNetRoles
-    public class AspNetRole
-    {
-        public string Id { get; set; } // Id (Primary key) (length: 128)
-        public string Name { get; set; } // Name (Primary key) (length: 256)
-    }
-
     // AspNetUsers
     public class AspNetUser
     {
         public string Id { get; set; } // Id (Primary key) (length: 128)
         public string Email { get; set; } // Email (length: 256)
-        public bool EmailConfirmed { get; set; } // EmailConfirmed (Primary key)
+        public bool EmailConfirmed { get; set; } // EmailConfirmed
         public string PasswordHash { get; set; } // PasswordHash
         public string SecurityStamp { get; set; } // SecurityStamp
         public string PhoneNumber { get; set; } // PhoneNumber
-        public bool PhoneNumberConfirmed { get; set; } // PhoneNumberConfirmed (Primary key)
-        public bool TwoFactorEnabled { get; set; } // TwoFactorEnabled (Primary key)
+        public bool PhoneNumberConfirmed { get; set; } // PhoneNumberConfirmed
+        public bool TwoFactorEnabled { get; set; } // TwoFactorEnabled
         public DateTime? LockoutEndDateUtc { get; set; } // LockoutEndDateUtc
-        public bool LockoutEnabled { get; set; } // LockoutEnabled (Primary key)
-        public int AccessFailedCount { get; set; } // AccessFailedCount (Primary key)
-        public string UserName { get; set; } // UserName (Primary key) (length: 256)
-    }
+        public bool LockoutEnabled { get; set; } // LockoutEnabled
+        public int AccessFailedCount { get; set; } // AccessFailedCount
+        public string UserName { get; set; } // UserName (length: 256)
 
-    // AspNetUserClaims
-    public class AspNetUserClaim
-    {
-        public int Id { get; set; } // Id (Primary key)
-        public string UserId { get; set; } // UserId (Primary key) (length: 128)
-        public string ClaimType { get; set; } // ClaimType
-        public string ClaimValue { get; set; } // ClaimValue
-    }
+        // Reverse navigation
 
-    // AspNetUserLogins
-    public class AspNetUserLogin
-    {
-        public string LoginProvider { get; set; } // LoginProvider (Primary key) (length: 128)
-        public string ProviderKey { get; set; } // ProviderKey (Primary key) (length: 128)
-        public string UserId { get; set; } // UserId (Primary key) (length: 128)
+        /// <summary>
+        /// Child Companies where [Companies].[OwerId] point to this entity (FK_Users_Companies)
+        /// </summary>
+        public virtual ICollection<Company> Companies { get; set; } // Companies.FK_Users_Companies
+
+        /// <summary>
+        /// Child Orders where [Orders].[AddedBy] point to this entity (FK_Orders_AspNetUsers)
+        /// </summary>
+        public virtual ICollection<Order> Orders_AddedBy { get; set; } // Orders.FK_Orders_AspNetUsers
+
+        /// <summary>
+        /// Child Orders where [Orders].[UpdatedBy] point to this entity (FK_Orders_AspNetUsers1)
+        /// </summary>
+        public virtual ICollection<Order> Orders_UpdatedBy { get; set; } // Orders.FK_Orders_AspNetUsers1
+
+        public AspNetUser()
+        {
+            Companies = new List<Company>();
+            Orders_AddedBy = new List<Order>();
+            Orders_UpdatedBy = new List<Order>();
+        }
     }
 
     // AspNetUserRoles
@@ -891,17 +891,117 @@ namespace Kebattle.DomainModel
         public string RoleId { get; set; } // RoleId (Primary key) (length: 128)
     }
 
-    // KebabType
-    public class KebabType
+    // Companies_Prices
+    public class CompaniesPrice
     {
-        public int Id { get; set; } // ID (Primary key)
+        public int Id { get; set; } // Id (Primary key)
+        public int CompanyId { get; set; } // CompanyId
+        public int KebabTypeId { get; set; } // KebabTypeId
+        public int KebabSizeId { get; set; } // KebabSizeId
+        public bool IsActive { get; set; } // IsActive
+        public decimal Price { get; set; } // Price
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Parent (One-to-One) CompaniesPrice pointed by [Companies_Prices].[Id] (FK_Companies_Prices_Companies_Prices)
+        /// </summary>
+        public virtual CompaniesPrice CompaniesPrice2 { get; set; } // Companies_Prices.FK_Companies_Prices_Companies_Prices
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent CompaniesPrice pointed by [Companies_Prices].([Id]) (FK_Companies_Prices_Companies_Prices)
+        /// </summary>
+        public virtual CompaniesPrice CompaniesPrice1 { get; set; } // FK_Companies_Prices_Companies_Prices
+
+        /// <summary>
+        /// Parent Company pointed by [Companies_Prices].([CompanyId]) (FK_Companies_Prices_Companies)
+        /// </summary>
+        public virtual Company Company { get; set; } // FK_Companies_Prices_Companies
+
+        /// <summary>
+        /// Parent KebabSize pointed by [Companies_Prices].([KebabSizeId]) (FK_Companies_Prices_KebabSizes)
+        /// </summary>
+        public virtual KebabSize KebabSize { get; set; } // FK_Companies_Prices_KebabSizes
+
+        public CompaniesPrice()
+        {
+            IsActive = false;
+            Price = 0m;
+        }
+    }
+
+    // Companies
+    public class Company
+    {
+        public int Id { get; set; } // Id (Primary key)
+        public string Name { get; set; } // Name (length: 50)
+        public string OwerId { get; set; } // OwerId (length: 128)
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child CompaniesPrices where [Companies_Prices].[CompanyId] point to this entity (FK_Companies_Prices_Companies)
+        /// </summary>
+        public virtual ICollection<CompaniesPrice> CompaniesPrices { get; set; } // Companies_Prices.FK_Companies_Prices_Companies
+
+        /// <summary>
+        /// Child Orders where [Orders].[CompanyId] point to this entity (FK_Orders_Companies)
+        /// </summary>
+        public virtual ICollection<Order> Orders { get; set; } // Orders.FK_Orders_Companies
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent AspNetUser pointed by [Companies].([OwerId]) (FK_Users_Companies)
+        /// </summary>
+        public virtual AspNetUser AspNetUser { get; set; } // FK_Users_Companies
+
+        public Company()
+        {
+            CompaniesPrices = new List<CompaniesPrice>();
+            Orders = new List<Order>();
+        }
+    }
+
+    // KebabSizes
+    public class KebabSize
+    {
+        public int Id { get; set; } // Id (Primary key)
         public string Name { get; set; } // Name (length: 150)
         public string Description { get; set; } // Description
 
         // Reverse navigation
 
         /// <summary>
-        /// Child Orders where [Orders].[KebabTypeID] point to this entity (FK_Orders_KebabType)
+        /// Child CompaniesPrices where [Companies_Prices].[KebabSizeId] point to this entity (FK_Companies_Prices_KebabSizes)
+        /// </summary>
+        public virtual ICollection<CompaniesPrice> CompaniesPrices { get; set; } // Companies_Prices.FK_Companies_Prices_KebabSizes
+
+        /// <summary>
+        /// Child Orders where [Orders].[KebabSizeId] point to this entity (FK_Orders_KebabSizes)
+        /// </summary>
+        public virtual ICollection<Order> Orders { get; set; } // Orders.FK_Orders_KebabSizes
+
+        public KebabSize()
+        {
+            CompaniesPrices = new List<CompaniesPrice>();
+            Orders = new List<Order>();
+        }
+    }
+
+    // KebabTypes
+    public class KebabType
+    {
+        public int Id { get; set; } // Id (Primary key)
+        public string Name { get; set; } // Name (length: 150)
+        public string Description { get; set; } // Description
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child Orders where [Orders].[KebabTypeId] point to this entity (FK_Orders_KebabType)
         /// </summary>
         public virtual ICollection<Order> Orders { get; set; } // Orders.FK_Orders_KebabType
 
@@ -911,17 +1011,17 @@ namespace Kebattle.DomainModel
         }
     }
 
-    // MeatType
+    // MeatTypes
     public class MeatType
     {
-        public int Id { get; set; } // ID (Primary key)
+        public int Id { get; set; } // Id (Primary key)
         public string Name { get; set; } // Name (length: 150)
         public string Description { get; set; } // Description
 
         // Reverse navigation
 
         /// <summary>
-        /// Child Orders where [Orders].[MeatTypeID] point to this entity (FK_Orders_MeatType)
+        /// Child Orders where [Orders].[MeatTypeId] point to this entity (FK_Orders_MeatType)
         /// </summary>
         public virtual ICollection<Order> Orders { get; set; } // Orders.FK_Orders_MeatType
 
@@ -934,16 +1034,41 @@ namespace Kebattle.DomainModel
     // Orders
     public class Order
     {
-        public int Id { get; set; } // ID (Primary key)
+        public int Id { get; set; } // Id (Primary key)
+        public int CompanyId { get; set; } // CompanyId
         public string Name { get; set; } // Name (length: 150)
-        public int KebabTypeId { get; set; } // KebabTypeID
-        public int SauceTypeId { get; set; } // SauceTypeID
-        public int MeatTypeId { get; set; } // MeatTypeID
+        public int KebabTypeId { get; set; } // KebabTypeId
+        public int SauceTypeId { get; set; } // SauceTypeId
+        public int MeatTypeId { get; set; } // MeatTypeId
+        public int KebabSizeId { get; set; } // KebabSizeId
+        public decimal Price { get; set; } // Price
         public string Notes { get; set; } // Notes
         public DateTime DateAdded { get; set; } // DateAdded
-        public DateTime DateUpdated { get; set; } // DateUpdated
+        public DateTime? DateUpdated { get; set; } // DateUpdated
+        public string AddedBy { get; set; } // AddedBy (length: 128)
+        public string UpdatedBy { get; set; } // UpdatedBy (length: 128)
 
         // Foreign keys
+
+        /// <summary>
+        /// Parent AspNetUser pointed by [Orders].([AddedBy]) (FK_Orders_AspNetUsers)
+        /// </summary>
+        public virtual AspNetUser AspNetUser_AddedBy { get; set; } // FK_Orders_AspNetUsers
+
+        /// <summary>
+        /// Parent AspNetUser pointed by [Orders].([UpdatedBy]) (FK_Orders_AspNetUsers1)
+        /// </summary>
+        public virtual AspNetUser AspNetUser_UpdatedBy { get; set; } // FK_Orders_AspNetUsers1
+
+        /// <summary>
+        /// Parent Company pointed by [Orders].([CompanyId]) (FK_Orders_Companies)
+        /// </summary>
+        public virtual Company Company { get; set; } // FK_Orders_Companies
+
+        /// <summary>
+        /// Parent KebabSize pointed by [Orders].([KebabSizeId]) (FK_Orders_KebabSizes)
+        /// </summary>
+        public virtual KebabSize KebabSize { get; set; } // FK_Orders_KebabSizes
 
         /// <summary>
         /// Parent KebabType pointed by [Orders].([KebabTypeId]) (FK_Orders_KebabType)
@@ -955,18 +1080,36 @@ namespace Kebattle.DomainModel
         /// </summary>
         public virtual MeatType MeatType { get; set; } // FK_Orders_MeatType
 
+        /// <summary>
+        /// Parent SauceType pointed by [Orders].([SauceTypeId]) (FK_Orders_SauceTypes)
+        /// </summary>
+        public virtual SauceType SauceType { get; set; } // FK_Orders_SauceTypes
+
         public Order()
         {
+            Price = 0m;
             DateAdded = DateTime.Now;
         }
     }
 
-    // SauceType
+    // SauceTypes
     public class SauceType
     {
-        public int Id { get; set; } // ID (Primary key)
+        public int Id { get; set; } // Id (Primary key)
         public string Name { get; set; } // Name (length: 150)
         public string Description { get; set; } // Description
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child Orders where [Orders].[SauceTypeId] point to this entity (FK_Orders_SauceTypes)
+        /// </summary>
+        public virtual ICollection<Order> Orders { get; set; } // Orders.FK_Orders_SauceTypes
+
+        public SauceType()
+        {
+            Orders = new List<Order>();
+        }
     }
 
     // database_firewall_rules
@@ -989,24 +1132,6 @@ namespace Kebattle.DomainModel
     // This is not a commercial licence, therefore only a few tables/views/stored procedures are generated.
     // ****************************************************************************************************
 
-    // AspNetRoles
-    public class AspNetRoleConfiguration : EntityTypeConfiguration<AspNetRole>
-    {
-        public AspNetRoleConfiguration()
-            : this("dbo")
-        {
-        }
-
-        public AspNetRoleConfiguration(string schema)
-        {
-            ToTable("AspNetRoles", schema);
-            HasKey(x => new { x.Id, x.Name });
-
-            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("nvarchar").IsRequired().HasMaxLength(128).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-            Property(x => x.Name).HasColumnName(@"Name").HasColumnType("nvarchar").IsRequired().HasMaxLength(256).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-        }
-    }
-
     // AspNetUsers
     public class AspNetUserConfiguration : EntityTypeConfiguration<AspNetUser>
     {
@@ -1018,59 +1143,20 @@ namespace Kebattle.DomainModel
         public AspNetUserConfiguration(string schema)
         {
             ToTable("AspNetUsers", schema);
-            HasKey(x => new { x.Id, x.EmailConfirmed, x.PhoneNumberConfirmed, x.TwoFactorEnabled, x.LockoutEnabled, x.AccessFailedCount, x.UserName });
+            HasKey(x => x.Id);
 
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("nvarchar").IsRequired().HasMaxLength(128).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
             Property(x => x.Email).HasColumnName(@"Email").HasColumnType("nvarchar").IsOptional().HasMaxLength(256);
-            Property(x => x.EmailConfirmed).HasColumnName(@"EmailConfirmed").HasColumnType("bit").IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+            Property(x => x.EmailConfirmed).HasColumnName(@"EmailConfirmed").HasColumnType("bit").IsRequired();
             Property(x => x.PasswordHash).HasColumnName(@"PasswordHash").HasColumnType("nvarchar(max)").IsOptional();
             Property(x => x.SecurityStamp).HasColumnName(@"SecurityStamp").HasColumnType("nvarchar(max)").IsOptional();
             Property(x => x.PhoneNumber).HasColumnName(@"PhoneNumber").HasColumnType("nvarchar(max)").IsOptional();
-            Property(x => x.PhoneNumberConfirmed).HasColumnName(@"PhoneNumberConfirmed").HasColumnType("bit").IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-            Property(x => x.TwoFactorEnabled).HasColumnName(@"TwoFactorEnabled").HasColumnType("bit").IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+            Property(x => x.PhoneNumberConfirmed).HasColumnName(@"PhoneNumberConfirmed").HasColumnType("bit").IsRequired();
+            Property(x => x.TwoFactorEnabled).HasColumnName(@"TwoFactorEnabled").HasColumnType("bit").IsRequired();
             Property(x => x.LockoutEndDateUtc).HasColumnName(@"LockoutEndDateUtc").HasColumnType("smalldatetime").IsOptional();
-            Property(x => x.LockoutEnabled).HasColumnName(@"LockoutEnabled").HasColumnType("bit").IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-            Property(x => x.AccessFailedCount).HasColumnName(@"AccessFailedCount").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-            Property(x => x.UserName).HasColumnName(@"UserName").HasColumnType("nvarchar").IsRequired().HasMaxLength(256).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-        }
-    }
-
-    // AspNetUserClaims
-    public class AspNetUserClaimConfiguration : EntityTypeConfiguration<AspNetUserClaim>
-    {
-        public AspNetUserClaimConfiguration()
-            : this("dbo")
-        {
-        }
-
-        public AspNetUserClaimConfiguration(string schema)
-        {
-            ToTable("AspNetUserClaims", schema);
-            HasKey(x => new { x.Id, x.UserId });
-
-            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-            Property(x => x.UserId).HasColumnName(@"UserId").HasColumnType("nvarchar").IsRequired().HasMaxLength(128).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-            Property(x => x.ClaimType).HasColumnName(@"ClaimType").HasColumnType("nvarchar(max)").IsOptional();
-            Property(x => x.ClaimValue).HasColumnName(@"ClaimValue").HasColumnType("nvarchar(max)").IsOptional();
-        }
-    }
-
-    // AspNetUserLogins
-    public class AspNetUserLoginConfiguration : EntityTypeConfiguration<AspNetUserLogin>
-    {
-        public AspNetUserLoginConfiguration()
-            : this("dbo")
-        {
-        }
-
-        public AspNetUserLoginConfiguration(string schema)
-        {
-            ToTable("AspNetUserLogins", schema);
-            HasKey(x => new { x.LoginProvider, x.ProviderKey, x.UserId });
-
-            Property(x => x.LoginProvider).HasColumnName(@"LoginProvider").HasColumnType("nvarchar").IsRequired().HasMaxLength(128).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-            Property(x => x.ProviderKey).HasColumnName(@"ProviderKey").HasColumnType("nvarchar").IsRequired().HasMaxLength(128).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-            Property(x => x.UserId).HasColumnName(@"UserId").HasColumnType("nvarchar").IsRequired().HasMaxLength(128).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+            Property(x => x.LockoutEnabled).HasColumnName(@"LockoutEnabled").HasColumnType("bit").IsRequired();
+            Property(x => x.AccessFailedCount).HasColumnName(@"AccessFailedCount").HasColumnType("int").IsRequired();
+            Property(x => x.UserName).HasColumnName(@"UserName").HasColumnType("nvarchar").IsRequired().HasMaxLength(256);
         }
     }
 
@@ -1092,7 +1178,75 @@ namespace Kebattle.DomainModel
         }
     }
 
-    // KebabType
+    // Companies_Prices
+    public class CompaniesPriceConfiguration : EntityTypeConfiguration<CompaniesPrice>
+    {
+        public CompaniesPriceConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public CompaniesPriceConfiguration(string schema)
+        {
+            ToTable("Companies_Prices", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            Property(x => x.CompanyId).HasColumnName(@"CompanyId").HasColumnType("int").IsRequired();
+            Property(x => x.KebabTypeId).HasColumnName(@"KebabTypeId").HasColumnType("int").IsRequired();
+            Property(x => x.KebabSizeId).HasColumnName(@"KebabSizeId").HasColumnType("int").IsRequired();
+            Property(x => x.IsActive).HasColumnName(@"IsActive").HasColumnType("bit").IsRequired();
+            Property(x => x.Price).HasColumnName(@"Price").HasColumnType("decimal").IsRequired().HasPrecision(18,0);
+
+            // Foreign keys
+            HasRequired(a => a.CompaniesPrice1).WithOptional(b => b.CompaniesPrice2).WillCascadeOnDelete(false); // FK_Companies_Prices_Companies_Prices
+            HasRequired(a => a.Company).WithMany(b => b.CompaniesPrices).HasForeignKey(c => c.CompanyId).WillCascadeOnDelete(false); // FK_Companies_Prices_Companies
+            HasRequired(a => a.KebabSize).WithMany(b => b.CompaniesPrices).HasForeignKey(c => c.KebabSizeId).WillCascadeOnDelete(false); // FK_Companies_Prices_KebabSizes
+        }
+    }
+
+    // Companies
+    public class CompanyConfiguration : EntityTypeConfiguration<Company>
+    {
+        public CompanyConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public CompanyConfiguration(string schema)
+        {
+            ToTable("Companies", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+            Property(x => x.Name).HasColumnName(@"Name").HasColumnType("nvarchar").IsOptional().HasMaxLength(50);
+            Property(x => x.OwerId).HasColumnName(@"OwerId").HasColumnType("nvarchar").IsRequired().HasMaxLength(128);
+
+            // Foreign keys
+            HasRequired(a => a.AspNetUser).WithMany(b => b.Companies).HasForeignKey(c => c.OwerId).WillCascadeOnDelete(false); // FK_Users_Companies
+        }
+    }
+
+    // KebabSizes
+    public class KebabSizeConfiguration : EntityTypeConfiguration<KebabSize>
+    {
+        public KebabSizeConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public KebabSizeConfiguration(string schema)
+        {
+            ToTable("KebabSizes", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+            Property(x => x.Name).HasColumnName(@"Name").HasColumnType("nvarchar").IsRequired().HasMaxLength(150);
+            Property(x => x.Description).HasColumnName(@"Description").HasColumnType("nvarchar(max)").IsOptional();
+        }
+    }
+
+    // KebabTypes
     public class KebabTypeConfiguration : EntityTypeConfiguration<KebabType>
     {
         public KebabTypeConfiguration()
@@ -1102,16 +1256,16 @@ namespace Kebattle.DomainModel
 
         public KebabTypeConfiguration(string schema)
         {
-            ToTable("KebabType", schema);
+            ToTable("KebabTypes", schema);
             HasKey(x => x.Id);
 
-            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
             Property(x => x.Name).HasColumnName(@"Name").HasColumnType("nvarchar").IsRequired().HasMaxLength(150);
             Property(x => x.Description).HasColumnName(@"Description").HasColumnType("nvarchar(max)").IsOptional();
         }
     }
 
-    // MeatType
+    // MeatTypes
     public class MeatTypeConfiguration : EntityTypeConfiguration<MeatType>
     {
         public MeatTypeConfiguration()
@@ -1121,10 +1275,10 @@ namespace Kebattle.DomainModel
 
         public MeatTypeConfiguration(string schema)
         {
-            ToTable("MeatType", schema);
+            ToTable("MeatTypes", schema);
             HasKey(x => x.Id);
 
-            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
             Property(x => x.Name).HasColumnName(@"Name").HasColumnType("nvarchar").IsRequired().HasMaxLength(150);
             Property(x => x.Description).HasColumnName(@"Description").HasColumnType("nvarchar(max)").IsOptional();
         }
@@ -1143,22 +1297,32 @@ namespace Kebattle.DomainModel
             ToTable("Orders", schema);
             HasKey(x => x.Id);
 
-            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            Property(x => x.CompanyId).HasColumnName(@"CompanyId").HasColumnType("int").IsRequired();
             Property(x => x.Name).HasColumnName(@"Name").HasColumnType("nvarchar").IsOptional().HasMaxLength(150);
-            Property(x => x.KebabTypeId).HasColumnName(@"KebabTypeID").HasColumnType("int").IsRequired();
-            Property(x => x.SauceTypeId).HasColumnName(@"SauceTypeID").HasColumnType("int").IsRequired();
-            Property(x => x.MeatTypeId).HasColumnName(@"MeatTypeID").HasColumnType("int").IsRequired();
+            Property(x => x.KebabTypeId).HasColumnName(@"KebabTypeId").HasColumnType("int").IsRequired();
+            Property(x => x.SauceTypeId).HasColumnName(@"SauceTypeId").HasColumnType("int").IsRequired();
+            Property(x => x.MeatTypeId).HasColumnName(@"MeatTypeId").HasColumnType("int").IsRequired();
+            Property(x => x.KebabSizeId).HasColumnName(@"KebabSizeId").HasColumnType("int").IsRequired();
+            Property(x => x.Price).HasColumnName(@"Price").HasColumnType("decimal").IsRequired().HasPrecision(18,0);
             Property(x => x.Notes).HasColumnName(@"Notes").HasColumnType("nvarchar(max)").IsOptional();
             Property(x => x.DateAdded).HasColumnName(@"DateAdded").HasColumnType("datetime").IsRequired();
-            Property(x => x.DateUpdated).HasColumnName(@"DateUpdated").HasColumnType("datetime").IsRequired();
+            Property(x => x.DateUpdated).HasColumnName(@"DateUpdated").HasColumnType("datetime").IsOptional();
+            Property(x => x.AddedBy).HasColumnName(@"AddedBy").HasColumnType("nvarchar").IsRequired().HasMaxLength(128);
+            Property(x => x.UpdatedBy).HasColumnName(@"UpdatedBy").HasColumnType("nvarchar").IsOptional().HasMaxLength(128);
 
             // Foreign keys
+            HasOptional(a => a.AspNetUser_UpdatedBy).WithMany(b => b.Orders_UpdatedBy).HasForeignKey(c => c.UpdatedBy).WillCascadeOnDelete(false); // FK_Orders_AspNetUsers1
+            HasRequired(a => a.AspNetUser_AddedBy).WithMany(b => b.Orders_AddedBy).HasForeignKey(c => c.AddedBy).WillCascadeOnDelete(false); // FK_Orders_AspNetUsers
+            HasRequired(a => a.Company).WithMany(b => b.Orders).HasForeignKey(c => c.CompanyId).WillCascadeOnDelete(false); // FK_Orders_Companies
+            HasRequired(a => a.KebabSize).WithMany(b => b.Orders).HasForeignKey(c => c.KebabSizeId).WillCascadeOnDelete(false); // FK_Orders_KebabSizes
             HasRequired(a => a.KebabType).WithMany(b => b.Orders).HasForeignKey(c => c.KebabTypeId).WillCascadeOnDelete(false); // FK_Orders_KebabType
             HasRequired(a => a.MeatType).WithMany(b => b.Orders).HasForeignKey(c => c.MeatTypeId).WillCascadeOnDelete(false); // FK_Orders_MeatType
+            HasRequired(a => a.SauceType).WithMany(b => b.Orders).HasForeignKey(c => c.SauceTypeId).WillCascadeOnDelete(false); // FK_Orders_SauceTypes
         }
     }
 
-    // SauceType
+    // SauceTypes
     public class SauceTypeConfiguration : EntityTypeConfiguration<SauceType>
     {
         public SauceTypeConfiguration()
@@ -1168,10 +1332,10 @@ namespace Kebattle.DomainModel
 
         public SauceTypeConfiguration(string schema)
         {
-            ToTable("SauceType", schema);
+            ToTable("SauceTypes", schema);
             HasKey(x => x.Id);
 
-            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
             Property(x => x.Name).HasColumnName(@"Name").HasColumnType("nchar").IsRequired().IsFixedLength().HasMaxLength(150);
             Property(x => x.Description).HasColumnName(@"Description").HasColumnType("nvarchar(max)").IsOptional();
         }

@@ -1,14 +1,18 @@
 ﻿using Kebattle.DomainModel;
-using System;
+using Kebattle.Interfaces.Generic;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Kebattle.Interfaces.Repositories
 {
-    public interface IOrderRepository
+    public interface IOrderRepository : IRepository<Order>
     {
-        List<Order> GetByCompanyID(int companyID);
+        List<Order> GetByCompanyId(int companyId);
+        Order GetOrder(int orderId);
+        List<SauceType> GetSauceTypes();
+        List<KebabType> GetKebabTypes();
+        List<MeatType> GetMeatTypes();
+        void SaveOrder(Order order);
+        void DeleteOrder(int id);
+        List<KebabSize> GetKebabSizes();
     }
 }

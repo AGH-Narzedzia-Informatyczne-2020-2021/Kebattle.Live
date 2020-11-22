@@ -1,35 +1,8 @@
-﻿@model List<Kebattle.DomainModel.Order>
-@{
+﻿@{
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
+<div class="text-center">
     <h1>Kebattle</h1>
-    <p class="lead">Nasz projekt na zajęcia z Panem Pawłem.</p>
-    <p><a href="/Account/Login" class="btn btn-success btn-lg">Zaloguj się &raquo;</a></p>
-</div>
-
-<div class="row">
-    <div class="col">
-        <h2>Aktualne zamówienia</h2>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Numer zamówienia</th>
-                    <th>Data zamówienia</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    @foreach(var item in Model)
-                    {
-                        <tr>
-                            <td>@item.Id</td>
-                            <td>@item.DateAdded.ToShortDateString()</td>
-                        </tr>
-                    }
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <p class="lead">Wygląd tymczasowy</p>
 </div>

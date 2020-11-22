@@ -40,6 +40,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Generic\IDatabaseFactory.cs" />
+    <Compile Include="Generic\IRepository.cs" />
+    <Compile Include="Repositories\IAspNetUserRepository.cs" />
+    <Compile Include="Repositories\ICompanyRepository.cs" />
     <Compile Include="Repositories\IOrderRepository.cs" />
   </ItemGroup>
   <ItemGroup>
