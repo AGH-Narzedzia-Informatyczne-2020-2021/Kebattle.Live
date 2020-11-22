@@ -1,6 +1,46 @@
-﻿@{
-    ViewBag.Title = "Statistics";
+﻿@model Kebattle.Web.Models.Order.OrdersListViewModel
+@{
+    ViewBag.Title = "Statystyki";
 }
 
-<h2>W trakcie budowy</h2>
+<h2>Let's go bitches</h2>
+<h2>Lista zamówień</h2>
+<table id="myStatTable" class="table">
+    <thead>
+        <tr>
+            <th>Lp.</th>
+            <th>Id</th>
+            <th>Nazwa</th>
+            <th>Rodzaj</th>
+            <th>Sos</th>
+            <th>Mięso</th>
+            <th>Rozmiar</th>
+            <th>Dodatkowe informacje</th>
+            <th>Data dodania</th>
+        </tr>
+    </thead>
+    <tbody>
+     @{
+         for (int i = 0; i < Model.Orders.Count();i++)
+         {
+             int j = i + 1;
+             var item = Model.Orders.ElementAt(i);
+                <tr id="r_@item.Id">
+                    <td>@j</td>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.KebabType</td>
+                    <td>@item.SauceType</td>
+                    <td>@item.MeatType</td>
+                    <td>@item.KebabSize</td>
+                    <td>@item.Notes</td>
+                    <td>@item.DateAdded.Value.ToString("dd-MM-yyyy")</td>
+                </tr>
+            }
+     }
+    </tbody>
+</table>
 
+<div>
+    @Html.ActionLink("Wróć do listy zamówień", "Index", new { companyID = Model.CompanyId })
+</div>
