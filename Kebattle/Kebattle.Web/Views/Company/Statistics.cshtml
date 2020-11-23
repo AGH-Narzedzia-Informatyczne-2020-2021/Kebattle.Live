@@ -10,12 +10,10 @@
         <tr>
             <th>Lp.</th>
             <th>Id</th>
-            <th>Nazwa</th>
             <th>Rodzaj</th>
             <th>Sos</th>
             <th>Mięso</th>
             <th>Rozmiar</th>
-            <th>Dodatkowe informacje</th>
             <th>Data dodania</th>
         </tr>
     </thead>
@@ -28,12 +26,10 @@
                 <tr id="r_@item.Id">
                     <td>@j</td>
                     <td>@item.Id</td>
-                    <td>@item.Name</td>
                     <td>@item.KebabType</td>
                     <td>@item.SauceType</td>
                     <td>@item.MeatType</td>
                     <td>@item.KebabSize</td>
-                    <td>@item.Notes</td>
                     <td>@item.DateAdded.Value.ToString("dd-MM-yyyy")</td>
                 </tr>
             }
@@ -43,7 +39,7 @@
 
 <h3>Edycja zamówienia</h3>
 
-@Html.Partial("_sForm", Model)
+@* @Html.Partial("_sForm", Model) *@
 
 <div>
     @Html.ActionLink("Wróć do listy zamówień", "Index", new { companyID = Model.CompanyId })
