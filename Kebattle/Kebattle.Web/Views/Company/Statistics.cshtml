@@ -1,4 +1,4 @@
-﻿@model Kebattle.Web.Models.Order.OrdersListViewModel
+﻿@model Kebattle.Web.Models.Company.StatisticsListViewModel
 @{
     ViewBag.Title = "Statystyki";
 }
@@ -20,11 +20,11 @@
         </tr>
     </thead>
     <tbody>
-     @{
-         for (int i = 0; i < Model.Orders.Count();i++)
-         {
-             int j = i + 1;
-             var item = Model.Orders.ElementAt(i);
+        @{
+            for (int i = 0; i < Model.Orders.Count(); i++)
+            {
+                int j = i + 1;
+                var item = Model.Orders.ElementAt(i);
                 <tr id="r_@item.Id">
                     <td>@j</td>
                     <td>@item.Id</td>
@@ -37,9 +37,13 @@
                     <td>@item.DateAdded.Value.ToString("dd-MM-yyyy")</td>
                 </tr>
             }
-     }
+        }
     </tbody>
 </table>
+
+<h3>Edycja zamówienia</h3>
+
+@Html.Partial("_sForm", Model)
 
 <div>
     @Html.ActionLink("Wróć do listy zamówień", "Index", new { companyID = Model.CompanyId })

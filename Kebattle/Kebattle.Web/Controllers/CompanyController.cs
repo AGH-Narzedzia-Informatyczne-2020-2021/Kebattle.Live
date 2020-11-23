@@ -29,7 +29,7 @@ namespace Kebattle.Web.Controllers
         public ActionResult Statistics(int companyId)
         {
             var orders = _orderRepository.GetByCompanyId(companyId);
-            var model = new OrdersListViewModel(orders);
+            var model = new StatisticsListViewModel(orders);
             return View(model);
         }
 
