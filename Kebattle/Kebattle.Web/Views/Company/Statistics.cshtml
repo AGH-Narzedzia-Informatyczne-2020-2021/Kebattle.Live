@@ -12,6 +12,7 @@
             <div>
                 <label for="Rodzaj">Rodzaj</label>
                 <select name="Rodzaj">
+                    <option></option>
                     <option>Bułka</option>
                     <option>Pita</option>
                 </select>
@@ -19,6 +20,7 @@
             <div>
                 <label for="Sos">Sos</label>
                 <select name="Sos">
+                    <option></option>
                     <option>Łagodny</option>
                     <option>Ostry</option>
                     <option>Bez sosu</option>
@@ -27,6 +29,7 @@
             <div>
                 <label for="Mieso">Mięso</label>
                 <select name="Mieso">
+                    <option></option>
                     <option>Wołowina</option>
                     <option>Jagnięcina</option>
                     <option>Baranina</option>
@@ -36,6 +39,7 @@
             <div>
                 <label for="Rozmiar">Rozmiar</label>
                 <select name="Rozmiar">
+                    <option></option>
                     <option>Mały</option>
                     <option>Średni</option>
                     <option>Duży</option>
@@ -57,7 +61,8 @@
             </div>
             <div>
                 <label>&nbsp;</label>
-                <input type="submit" value="Pokaż" class="submit" disabled/>
+                <input type="submit" value="Pokaż" class="submit" disabled />
+                <input type="submit" value="Pokaż/ukryj szczególy" class="submit" disabled />
                 <button type="reset">Reset</button>
             </div>
         </fieldset>
@@ -78,9 +83,14 @@
     </thead>
     <tbody>
         @{
+            int j = 0;
+            int[] typy = { 1, 0 };
+            int[] sosy = { 0, 1, 0 };
+            int[] miesa = { 0, 1, 0, 0 };
+            int[] rozmiar = { 1, 0 };
             for (int i = 0; i < Model.Statistics.Count(); i++)
             {
-                int j = i + 1;
+                j = i + 1;
                 var item = Model.Statistics.ElementAt(i);
                 <tr id="r_@item.Id">
                     <td>@j</td>
@@ -92,6 +102,56 @@
                     <td>@item.DateAdded.Value.ToString("dd-MM-yyyy")</td>
                 </tr>
             }
+            <tr>
+                <th><h2>Podsumowanie</h2></th>
+                <th><h2>Łącznie: @j</h2></th>
+            </tr>
+            <tr>
+                <th>Rodzaj: </th>
+                <th>Bułka</th>
+                <th>Pita</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td>@typy[0]</td>
+                <td>@typy[1]</td>
+            </tr>
+            <tr>
+                <th>Mięso:</th>
+                <th>Wołowina</th>
+                <th>Jagniecina</th>
+                <th>Baranina</th>
+                <th>Kurczak</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td>@miesa[0]</td>
+                <td>@miesa[1]</td>
+                <td>@miesa[2]</td>
+                <td>@miesa[3]</td>
+            </tr>
+            <tr>
+                <th>Sos:</th>
+                <th>Brak</th>
+                <th>Łagodny</th>
+                <th>Ostry</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td>@sosy[0]</td>
+                <td>@sosy[1]</td>
+                <td>@sosy[2]</td>
+            </tr>
+            <tr>
+                <th>Rozmiar:</th>
+                <th>Mały</th>
+                <th>Duży</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td>@rozmiar[0]</td>
+                <td>@rozmiar[1]</td>
+            </tr>
         }
     </tbody>
 </table>
