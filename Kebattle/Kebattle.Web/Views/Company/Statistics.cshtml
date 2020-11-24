@@ -3,8 +3,67 @@
     ViewBag.Title = "Statystyki";
 }
 
-<h2>Let's go bitches</h2>
-<h2>Lista zamówień</h2>
+<h2>Statystyki</h2>
+
+<body>
+    <form method="post">
+        <fieldset>
+            <legend>Wybierz interesujące Cię parametry</legend>
+            <div>
+                <label for="Rodzaj">Rodzaj</label>
+                <select name="Rodzaj">
+                    <option>Bułka</option>
+                    <option>Pita</option>
+                </select>
+            </div>
+            <div>
+                <label for="Sos">Sos</label>
+                <select name="Sos">
+                    <option>Łagodny</option>
+                    <option>Ostry</option>
+                    <option>Bez sosu</option>
+                </select>
+            </div>
+            <div>
+                <label for="Mieso">Mięso</label>
+                <select name="Mieso">
+                    <option>Wołowina</option>
+                    <option>Jagnięcina</option>
+                    <option>Baranina</option>
+                    <option>Kurczak</option>
+                </select>
+            </div>
+            <div>
+                <label for="Rozmiar">Rozmiar</label>
+                <select name="Rozmiar">
+                    <option>Mały</option>
+                    <option>Średni</option>
+                    <option>Duży</option>
+                </select>
+            </div>
+            <div>
+                <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+                <link rel="stylesheet" href="/resources/demos/style.css">
+                <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+                <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+                <script>
+                    $(function () {
+                        $("#datepicker").datepicker();
+                    });
+                </script>
+                <p>Data od: <input type="text" name="dataod" id="datepicker"></p>
+                <p>Data do: <input type="text" name="datado" id="datepicker"></p>
+
+            </div>
+            <div>
+                <label>&nbsp;</label>
+                <input type="submit" value="Pokaż" class="submit" disabled/>
+                <button type="reset">Reset</button>
+            </div>
+        </fieldset>
+    </form>
+</body>
+
 <table id="myStatTable" class="table">
     <thead>
         <tr>
@@ -37,9 +96,7 @@
     </tbody>
 </table>
 
-<h3>Edycja zamówienia</h3>
 
-@* @Html.Partial("_sForm", Model) *@
 
 <div>
     @Html.ActionLink("Wróć do listy zamówień", "Index", new { companyID = Model.CompanyId })
