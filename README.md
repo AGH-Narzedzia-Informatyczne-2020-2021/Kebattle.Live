@@ -66,7 +66,7 @@ Nazwa użytkownika | Gist :hash::one: | Gist :hash::two: | Dodatkowe informacje 
 [@klasycznienielogiczny](https://github.com/klasycznienielogiczny) | [Sekretny :lock_with_ink_pen:](https://gist.github.com/klasycznienielogiczny/ca73fff7d06312628d9050b21d544a19) | [Publiczny](https://gist.github.com/klasycznienielogiczny/d911bebdf897da25ca01ea7489177add)| :put_litter_in_its_place:
 [@pmalisz](https://github.com/pmalisz) | [Publiczny](https://gist.github.com/pmalisz/7ddb879d79da5c4708a7da0e5434f34a) | [Sekretny](https://gist.github.com/pmalisz/769e368ff406f25d1bcc4199db37a75c) | :put_litter_in_its_place:
 [@KamilaBaizakova](https://github.com/KamilaBaizakova) | :question: | :grey_question: | :put_litter_in_its_place:
-[@andrzejmidura](https://github.com/andrzejmidura) | :question: | :grey_question: | :put_litter_in_its_place:
+[@andrzejmidura](https://github.com/andrzejmidura) | [Publiczny](https://gist.github.com/andrzejmidura/216f2d59e50edfaac59531d11a33f511) | [Sekretny](https://gist.github.com/andrzejmidura/d9e67b61c0c0bbb8c62886c69472028e) | :put_litter_in_its_place:
 [@Azuyuto](https://github.com/Azuyuto) | [Publiczny](https://gist.github.com/Azuyuto/58f28039745cb399f608bfae4d436d4a) | [Sekretny](https://gist.github.com/Azuyuto/b2e2325a94a7185d916ee7ef74b49bd0) | :put_litter_in_its_place:
 [@palkahubert](https://github.com/palkahubert) | [Publiczny](https://gist.github.com/palkahubert/b6a12f4ff40460b5feeaf75ea9f5121b)  | [Sekretny](https://gist.github.com/palkahubert/757c6f1ae0d8714e6e28c8a27c71074c) | :put_litter_in_its_place:
 
