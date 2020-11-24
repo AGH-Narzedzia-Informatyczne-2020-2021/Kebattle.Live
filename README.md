@@ -67,7 +67,7 @@ Nazwa użytkownika | Gist :hash::one: | Gist :hash::two: | Dodatkowe informacje 
 [@pmalisz](https://github.com/pmalisz) | [Publiczny](https://gist.github.com/pmalisz/7ddb879d79da5c4708a7da0e5434f34a) | [Sekretny](https://gist.github.com/pmalisz/769e368ff406f25d1bcc4199db37a75c) | :put_litter_in_its_place:
 [@KamilaBaizakova](https://github.com/KamilaBaizakova) | :question: | :grey_question: | :put_litter_in_its_place:
 [@andrzejmidura](https://github.com/andrzejmidura) | :question: | :grey_question: | :put_litter_in_its_place:
-[@Azuyuto](https://github.com/Azuyuto) | :question: | :grey_question: | :put_litter_in_its_place:
+[@Azuyuto](https://github.com/Azuyuto) | [Publiczny](https://gist.github.com/Azuyuto/58f28039745cb399f608bfae4d436d4a) | [Sekretny](https://gist.github.com/Azuyuto/b2e2325a94a7185d916ee7ef74b49bd0) | :put_litter_in_its_place:
 [@palkahubert](https://github.com/palkahubert) | :question: | :grey_question: | :put_litter_in_its_place:
 
 
