@@ -1,0 +1,61 @@
+﻿@*
+        <!-- To jednak też nie będzie potrzebne -->
+
+    @model Kebattle.Web.Models.Company.StatisticViewModel
+
+    @using (Html.BeginForm("Save", "Order"))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.HiddenFor(model => model.DateAdded)
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.CompanyId)
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.KebabTypeId, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.KebabTypeId, Model.KebabTypes, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.KebabTypeId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.SauceTypeId, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.SauceTypeId, Model.SauceTypes, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.SauceTypeId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.MeatTypeId, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.MeatTypeId, Model.MeatTypes, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.MeatTypeId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.KebabSizeId, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.KebabSizeId, Model.KebabSizes, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.KebabSizeId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Zapisz" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+    }
+
+
+    <div>
+        @Html.ActionLink("Wróć do listy zamówień", "Index", new { companyID = Model.CompanyId })
+    </div>
+
+    @section Scripts
+    {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+*@
+

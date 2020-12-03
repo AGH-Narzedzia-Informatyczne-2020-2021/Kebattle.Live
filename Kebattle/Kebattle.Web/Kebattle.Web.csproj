@@ -196,6 +196,8 @@
     <Compile Include="Helpers\SessionHelper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Company\CompaniesListViewModel.cs" />
+    <Compile Include="Models\Company\StatisticsListViewModel.cs" />
+    <Compile Include="Models\Company\StatisticViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Order\OrdersListViewModel.cs" />
@@ -625,6 +627,7 @@
     <Content Include="Views\Company\Statistics.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Company\Settings.cshtml" />
+    <Content Include="Views\Company\_sForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
