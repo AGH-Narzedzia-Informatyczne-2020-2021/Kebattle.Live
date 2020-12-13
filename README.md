@@ -61,7 +61,8 @@ Nazwa użytkownika | Imię
 - [x] Rozpisać i przydzielić zadania dla członów
 - [x] Wykorzystać [git flow](https://guides.github.com/introduction/flow/) do pracy nad projektem
 - [x] Skonfigurować projekt
-- [x] **Bieżące aktualizacje można znaleźć na Trello/githubie/Slacku**
+
+**Bieżące aktualizacje można znaleźć na Trello/githubie/Slacku**
 
 ## Gisty
 
