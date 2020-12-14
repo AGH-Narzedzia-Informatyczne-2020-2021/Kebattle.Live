@@ -28,8 +28,7 @@ namespace Kebattle.Web
                       "~/Content/bootstrap.min.css",
                       "~/Content/site.css",
                       "~/Contant/DataTables/css/dataTablesmin.bootstrap4.css",
-                      "~/Content/DataTables/css/responsive.dataTablesmin.css",
-                      "~/Content/contact.css"));
+                      "~/Content/DataTables/css/responsive.dataTablesmin.css"));
 
             bundles.Add(new StyleBundle("~/Content/font-awesome").Include(
                       "~/Content/font-awesome.min.css"));
