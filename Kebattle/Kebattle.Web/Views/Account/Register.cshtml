@@ -30,6 +30,12 @@
         </div>
     </div>
     <div class="form-group">
+        <div class="col-md-10">
+            @Html.CheckBoxFor(m => m.CreateFirmAccount)
+            @Html.LabelFor(m => m.CreateFirmAccount, new { @class = "control-label" })
+        </div>
+    </div>
+    <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" class="btn btn-primary" value="Zarejestruj" />
         </div>

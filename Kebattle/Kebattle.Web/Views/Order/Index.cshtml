@@ -1,42 +1,47 @@
 ﻿@model Kebattle.Web.Models.Order.OrdersListViewModel
-
+@using Kebattle.Web.Helpers
 @{
     ViewBag.Title = "Index";
 }
 
-<a href="/Order/Create?companyID=@Model.CompanyId" class="btn btn-success pull-right">Dodaj nowe</a>
+@if (Model.CompanyId == SessionHelper.GetCompanyId())
+{
+    <a href="/Order/Create?companyID=@Model.CompanyId" class="btn btn-success pull-right">Dodaj nowe</a>
+}
 <h2>Lista zamówień</h2>
 <table id="myTable" class="table">
     <thead>
         <tr>
-            <th>Id</th>
-            <th>Nazwa</th>
             <th>Rodzaj</th>
             <th>Sos</th>
             <th>Mięso</th>
             <th>Rozmiar</th>
             <th>Dodatkowe informacje</th>
             <th>Data dodania</th>
-            <th></th>
+            @if (Model.CompanyId == SessionHelper.GetCompanyId())
+            {
+                <th></th>
+            }
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.Orders)
         {
             <tr id="r_@item.Id">
-                <td>@item.Id</td>
-                <td>@item.Name</td>
                 <td>@item.KebabType</td>
                 <td>@item.SauceType</td>
                 <td>@item.MeatType</td>
                 <td>@item.KebabSize</td>
                 <td>@item.Notes</td>
                 <td>@item.DateAdded.Value.ToString("dd-MM-yyyy")</td>
-                <td>
-                    <a href="/Order/View?id=@item.Id" class="text-info"><i class="fa fa-info"></i></a>
-                    <a href="/Order/Edit?id=@item.Id" class="text-primary"><i class="fa fa-edit"></i></a>
-                    <a href="javascript:deleteOrder(@item.Id)" class="text-danger"><i class="fa fa-times"></i></a>
-                </td>
+                @if (Model.CompanyId == SessionHelper.GetCompanyId())
+                {
+                    <td>
+                        <a href="/Order/View?id=@item.Id" class="text-info"><i class="fa fa-info"></i></a>
+                        <a href="/Order/Edit?id=@item.Id" class="text-primary"><i class="fa fa-edit"></i></a>
+                        <a href="javascript:deleteOrder(@item.Id)" class="text-danger"><i class="fa fa-times"></i></a>
+                    </td>
+                }
             </tr>
         }
     </tbody>

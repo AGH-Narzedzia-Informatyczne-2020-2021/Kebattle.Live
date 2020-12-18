@@ -79,6 +79,9 @@ namespace Kebattle.Web.Models
         [Display(Name = "Potwierdź hasło")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "Stwórz konto jako firma")]
+        public bool CreateFirmAccount { get; set; }
     }
 
     public class ResetPasswordViewModel

@@ -1,4 +1,5 @@
 ﻿using Kebattle.Interfaces.Repositories;
+using Kebattle.Web.Models.Home;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +11,17 @@ namespace Kebattle.Web.Controllers
     public class HomeController : Controller
     {
         private readonly IOrderRepository _orderRepository;
-        public HomeController(IOrderRepository orderRepository)
+        private readonly ICompanyRepository _companyRepository;
+        public HomeController(IOrderRepository orderRepository, ICompanyRepository companyRepository)
         {
             _orderRepository = orderRepository;
+            _companyRepository = companyRepository;
         }
         public ActionResult Index()
         {
-            return View();
+            var vm = new HomeViewModel();
+            vm.Initialize(_orderRepository, _companyRepository);
+            return View(vm);
         }
 
         public ActionResult About()

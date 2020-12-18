@@ -196,8 +196,10 @@
     <Compile Include="Helpers\SessionHelper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Company\CompaniesListViewModel.cs" />
+    <Compile Include="Models\Company\SettingsViewModel.cs" />
     <Compile Include="Models\Company\StatisticsListViewModel.cs" />
     <Compile Include="Models\Company\StatisticViewModel.cs" />
+    <Compile Include="Models\Home\HomeViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Order\OrdersListViewModel.cs" />
@@ -382,6 +384,7 @@
     <Content Include="Resources\Daco_5453030.png" />
     <Content Include="Resources\Daco_5457625.png" />
     <Content Include="Resources\Daco_5460249.png" />
+    <Content Include="Resources\default.jpg" />
     <Content Include="Resources\Hungry_Woman_Astronaut_Eating_Kebab_Doner_Shawarma_Astronaut_Woman_Hungry_Eating.jpg" />
     <Content Include="Resources\lang.PNG" />
     <Content Include="Resources\license.PNG" />
@@ -634,6 +637,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Company\Settings.cshtml" />
     <Content Include="Views\Company\_sForm.cshtml" />
+    <Content Include="Views\Company\PriceList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

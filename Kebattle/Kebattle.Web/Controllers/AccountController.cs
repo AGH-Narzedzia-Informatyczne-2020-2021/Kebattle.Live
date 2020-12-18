@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Kebattle.Web.Models;
 using Kebattle.Web.Helpers;
+using Kebattle.Interfaces.Repositories;
 
 namespace Kebattle.Web.Controllers
 {
@@ -23,7 +24,7 @@ namespace Kebattle.Web.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -157,6 +158,11 @@ namespace Kebattle.Web.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    if(model.CreateFirmAccount)
+                    {
+                        var companyRepository = DependencyResolver.Current.GetService<ICompanyRepository>();
+                        companyRepository.CreateFirmAccount(model.Email);
+                    }
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

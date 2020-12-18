@@ -1,5 +1,61 @@
-﻿@{
+﻿@model Kebattle.Web.Models.Company.SettingsViewModel
+@{
     ViewBag.Title = "Ustawienia";
 }
 
-<h2>W trakcie budowy</h2>
+<h2>Ustawienia firmy</h2>
+<hr>
+@using (Html.BeginForm("Settings", "Company", FormMethod.Post))
+{
+    @Html.LabelFor(m => m.CompanyName)
+    @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control" })
+    @Html.LabelFor(m => m.Url)
+    @Html.TextBoxFor(m => m.Url, new { @class = "form-control" })
+    @Html.HiddenFor(m => m.CompanyId)
+    <hr />
+    <table class="table bg-light table-bordered">
+        <thead class="text-center">
+            <tr>
+                <th></th>
+                @foreach (var type in Model.KebabTypes)
+                {
+                    <th>@type.Name</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @{int i = 0;}
+            @foreach (var size in Model.KebabSizes)
+            {
+                <tr>
+                    <td class="text-center">@size.Name</td>
+                    @foreach (var type in Model.KebabTypes)
+                    {
+                        var price = Model.CompaniesPrice.Where(a => a.KebabSizeId == size.Id && a.KebabTypeId == type.Id).FirstOrDefault();
+                        @Html.Hidden(String.Format("CompaniesPrice[{0}].Id", i), price.Id)
+                        @Html.Hidden(String.Format("CompaniesPrice[{0}].KebabSizeId", i), price.KebabSizeId)
+                        @Html.Hidden(String.Format("CompaniesPrice[{0}].KebabTypeId", i), price.KebabTypeId)
+                        @Html.Hidden(String.Format("CompaniesPrice[{0}].CompanyId", i), price.CompanyId)
+                        <td>
+                            <div class="input-group ">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        @Html.CheckBox(String.Format("CompaniesPrice[{0}].IsActive", i), price.IsActive)
+                                    </div>
+                                </div>
+                                @Html.TextBox(String.Format("CompaniesPrice[{0}].Price", i), price.Price, new { @class = "form-control text-center" })
+                                <div class="input-group-append">
+                                    <span class="input-group-text">zł</span>
+                                </div>
+                            </div>
+                        </td>
+                        i++;
+                    }
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+    <button type="submit" class="btn btn-success pull-right">Zapisz zmiany</button>
+}

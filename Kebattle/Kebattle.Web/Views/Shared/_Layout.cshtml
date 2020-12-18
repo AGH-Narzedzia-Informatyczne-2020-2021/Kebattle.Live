@@ -20,15 +20,14 @@
 
             <div class="navbar-collapse collapse" id="navbarsExample07" style="">
                 <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">@Html.ActionLink("Restauracje", "Index", "Company", routeValues: null, htmlAttributes: new { @class = "nav-link" })</li>
                     @if (SessionHelper.IsCompany())
                     {
+                        <li class="nav-item"><i class="nav-link">|</i></li>
                         <li class="nav-item">@Html.ActionLink("Zamówienia", "Index", "Order", routeValues: new { companyId = SessionHelper.GetCompanyId() }, htmlAttributes: new { @class = "nav-link" })</li>
                         <li class="nav-item">@Html.ActionLink("Statystyki", "Statistics", "Company", routeValues: new { companyId = SessionHelper.GetCompanyId() }, htmlAttributes: new { @class = "nav-link" })</li>
                         <li class="nav-item">@Html.ActionLink("Ustawienia", "Settings", "Company", routeValues: new { companyId = SessionHelper.GetCompanyId() }, htmlAttributes: new { @class = "nav-link" })</li>
-                    }
-                    else if (!String.IsNullOrEmpty(SessionHelper.GetUserId()))
-                    {
-                        <li class="nav-item">@Html.ActionLink("Zamówienia", "Index", "Company", routeValues: null, htmlAttributes: new { @class = "nav-link" })</li>
+                        <li class="nav-item"><i class="nav-link">|</i></li>
                     }
                     <li class="nav-item">@Html.ActionLink("O nas", "About", "Home", routeValues: null, htmlAttributes: new { @class = "nav-link" })</li>
                     <li class="nav-item">@Html.ActionLink("Kontakt", "Contact", "Home", routeValues: null, htmlAttributes: new { @class = "nav-link" })</li>

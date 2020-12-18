@@ -35,8 +35,37 @@ namespace Kebattle.Web.Controllers
 
         public ActionResult Settings(int companyId)
         {
+            var vm = new SettingsViewModel()
+            {
+                CompanyId = companyId
+            };
+            vm.Initialize(_orderRepository);
+            vm.InitializeCompany(_companyRepository);
+            return View(vm);
+        }
 
-            return View();
+        [HttpPost]
+        public ActionResult Settings(SettingsViewModel vm)
+        {
+            if(ModelState.IsValid)
+            {
+                _companyRepository.AddOrUpdateCompaniesPrice(vm.CompaniesPrice);
+                _companyRepository.UpdateCompanyName(vm.CompanyId, vm.CompanyName, vm.Url);
+                return RedirectToAction("Settings", new { companyId = vm.CompanyId });
+            }
+            vm.Initialize(_orderRepository);
+            return View(vm);
+        }
+
+        public ActionResult PriceList(int companyId)
+        {
+            var vm = new SettingsViewModel()
+            {
+                CompanyId = companyId
+            };
+            vm.Initialize(_orderRepository);
+            vm.InitializeCompany(_companyRepository);
+            return View(vm);
         }
     }
 }

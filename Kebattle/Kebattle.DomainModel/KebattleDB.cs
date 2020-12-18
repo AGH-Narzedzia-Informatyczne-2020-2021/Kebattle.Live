@@ -38,13 +38,13 @@ namespace Kebattle.DomainModel
     public interface IMyDbContext : IDisposable
     {
         DbSet<AspNetUser> AspNetUsers { get; set; } // AspNetUsers
-        DbSet<AspNetUserRole> AspNetUserRoles { get; set; } // AspNetUserRoles
         DbSet<CompaniesPrice> CompaniesPrices { get; set; } // Companies_Prices
         DbSet<Company> Companies { get; set; } // Companies
         DbSet<KebabSize> KebabSizes { get; set; } // KebabSizes
         DbSet<KebabType> KebabTypes { get; set; } // KebabTypes
         DbSet<MeatType> MeatTypes { get; set; } // MeatTypes
         DbSet<Order> Orders { get; set; } // Orders
+        DbSet<OrderStatus> OrderStatus { get; set; } // OrderStatuses
         DbSet<SauceType> SauceTypes { get; set; } // SauceTypes
         DbSet<sys_DatabaseFirewallRule> sys_DatabaseFirewallRules { get; set; } // database_firewall_rules
 
@@ -60,31 +60,6 @@ namespace Kebattle.DomainModel
         DbSet Set(Type entityType);
         DbSet<TEntity> Set<TEntity>() where TEntity : class;
         string ToString();
-
-        // Stored Procedures
-        int SpAlterdiagram(string diagramname, int? ownerId, int? version, byte[] definition);
-        // SpAlterdiagramAsync() cannot be created due to having out parameters, or is relying on the procedure result (int)
-
-        int SpCreatediagram(string diagramname, int? ownerId, int? version, byte[] definition);
-        // SpCreatediagramAsync() cannot be created due to having out parameters, or is relying on the procedure result (int)
-
-        int SpDropdiagram(string diagramname, int? ownerId);
-        // SpDropdiagramAsync() cannot be created due to having out parameters, or is relying on the procedure result (int)
-
-        List<SpHelpdiagramdefinitionReturnModel> SpHelpdiagramdefinition(string diagramname, int? ownerId);
-        List<SpHelpdiagramdefinitionReturnModel> SpHelpdiagramdefinition(string diagramname, int? ownerId, out int procResult);
-        Task<List<SpHelpdiagramdefinitionReturnModel>> SpHelpdiagramdefinitionAsync(string diagramname, int? ownerId);
-
-        List<SpHelpdiagramsReturnModel> SpHelpdiagrams(string diagramname, int? ownerId);
-        List<SpHelpdiagramsReturnModel> SpHelpdiagrams(string diagramname, int? ownerId, out int procResult);
-        Task<List<SpHelpdiagramsReturnModel>> SpHelpdiagramsAsync(string diagramname, int? ownerId);
-
-        int SpRenamediagram(string diagramname, int? ownerId, string newDiagramname);
-        // SpRenamediagramAsync() cannot be created due to having out parameters, or is relying on the procedure result (int)
-
-        int SpUpgraddiagrams();
-        // SpUpgraddiagramsAsync() cannot be created due to having out parameters, or is relying on the procedure result (int)
-
     }
 
     #endregion
@@ -98,13 +73,13 @@ namespace Kebattle.DomainModel
     public class MyDbContext : DbContext, IMyDbContext
     {
         public DbSet<AspNetUser> AspNetUsers { get; set; } // AspNetUsers
-        public DbSet<AspNetUserRole> AspNetUserRoles { get; set; } // AspNetUserRoles
         public DbSet<CompaniesPrice> CompaniesPrices { get; set; } // Companies_Prices
         public DbSet<Company> Companies { get; set; } // Companies
         public DbSet<KebabSize> KebabSizes { get; set; } // KebabSizes
         public DbSet<KebabType> KebabTypes { get; set; } // KebabTypes
         public DbSet<MeatType> MeatTypes { get; set; } // MeatTypes
         public DbSet<Order> Orders { get; set; } // Orders
+        public DbSet<OrderStatus> OrderStatus { get; set; } // OrderStatuses
         public DbSet<SauceType> SauceTypes { get; set; } // SauceTypes
         public DbSet<sys_DatabaseFirewallRule> sys_DatabaseFirewallRules { get; set; } // database_firewall_rules
 
@@ -168,13 +143,13 @@ namespace Kebattle.DomainModel
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Configurations.Add(new AspNetUserConfiguration());
-            modelBuilder.Configurations.Add(new AspNetUserRoleConfiguration());
             modelBuilder.Configurations.Add(new CompaniesPriceConfiguration());
             modelBuilder.Configurations.Add(new CompanyConfiguration());
             modelBuilder.Configurations.Add(new KebabSizeConfiguration());
             modelBuilder.Configurations.Add(new KebabTypeConfiguration());
             modelBuilder.Configurations.Add(new MeatTypeConfiguration());
             modelBuilder.Configurations.Add(new OrderConfiguration());
+            modelBuilder.Configurations.Add(new OrderStatusConfiguration());
             modelBuilder.Configurations.Add(new SauceTypeConfiguration());
             modelBuilder.Configurations.Add(new sys_DatabaseFirewallRuleConfiguration());
         }
@@ -182,199 +157,18 @@ namespace Kebattle.DomainModel
         public static DbModelBuilder CreateModel(DbModelBuilder modelBuilder, string schema)
         {
             modelBuilder.Configurations.Add(new AspNetUserConfiguration(schema));
-            modelBuilder.Configurations.Add(new AspNetUserRoleConfiguration(schema));
             modelBuilder.Configurations.Add(new CompaniesPriceConfiguration(schema));
             modelBuilder.Configurations.Add(new CompanyConfiguration(schema));
             modelBuilder.Configurations.Add(new KebabSizeConfiguration(schema));
             modelBuilder.Configurations.Add(new KebabTypeConfiguration(schema));
             modelBuilder.Configurations.Add(new MeatTypeConfiguration(schema));
             modelBuilder.Configurations.Add(new OrderConfiguration(schema));
+            modelBuilder.Configurations.Add(new OrderStatusConfiguration(schema));
             modelBuilder.Configurations.Add(new SauceTypeConfiguration(schema));
             modelBuilder.Configurations.Add(new sys_DatabaseFirewallRuleConfiguration(schema));
 
             return modelBuilder;
         }
-
-        // Stored Procedures
-        public int SpAlterdiagram(string diagramname, int? ownerId, int? version, byte[] definition)
-        {
-            var diagramnameParam = new SqlParameter { ParameterName = "@diagramname", SqlDbType = SqlDbType.NVarChar, Direction = ParameterDirection.Input, Value = diagramname, Size = 128 };
-            if (diagramnameParam.Value == null)
-                diagramnameParam.Value = DBNull.Value;
-
-            var ownerIdParam = new SqlParameter { ParameterName = "@owner_id", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Input, Value = ownerId.GetValueOrDefault(), Precision = 10, Scale = 0 };
-            if (!ownerId.HasValue)
-                ownerIdParam.Value = DBNull.Value;
-
-            var versionParam = new SqlParameter { ParameterName = "@version", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Input, Value = version.GetValueOrDefault(), Precision = 10, Scale = 0 };
-            if (!version.HasValue)
-                versionParam.Value = DBNull.Value;
-
-            var definitionParam = new SqlParameter { ParameterName = "@definition", SqlDbType = SqlDbType.VarBinary, Direction = ParameterDirection.Input, Value = definition, Size = -1 };
-            if (definitionParam.Value == null)
-                definitionParam.Value = DBNull.Value;
-
-            var procResultParam = new SqlParameter { ParameterName = "@procResult", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
-
-            Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, "EXEC @procResult = [dbo].[sp_alterdiagram] @diagramname, @owner_id, @version, @definition", diagramnameParam, ownerIdParam, versionParam, definitionParam, procResultParam);
-
-            return (int)procResultParam.Value;
-        }
-
-        // SpAlterdiagramAsync() cannot be created due to having out parameters, or is relying on the procedure result (int)
-
-        public int SpCreatediagram(string diagramname, int? ownerId, int? version, byte[] definition)
-        {
-            var diagramnameParam = new SqlParameter { ParameterName = "@diagramname", SqlDbType = SqlDbType.NVarChar, Direction = ParameterDirection.Input, Value = diagramname, Size = 128 };
-            if (diagramnameParam.Value == null)
-                diagramnameParam.Value = DBNull.Value;
-
-            var ownerIdParam = new SqlParameter { ParameterName = "@owner_id", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Input, Value = ownerId.GetValueOrDefault(), Precision = 10, Scale = 0 };
-            if (!ownerId.HasValue)
-                ownerIdParam.Value = DBNull.Value;
-
-            var versionParam = new SqlParameter { ParameterName = "@version", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Input, Value = version.GetValueOrDefault(), Precision = 10, Scale = 0 };
-            if (!version.HasValue)
-                versionParam.Value = DBNull.Value;
-
-            var definitionParam = new SqlParameter { ParameterName = "@definition", SqlDbType = SqlDbType.VarBinary, Direction = ParameterDirection.Input, Value = definition, Size = -1 };
-            if (definitionParam.Value == null)
-                definitionParam.Value = DBNull.Value;
-
-            var procResultParam = new SqlParameter { ParameterName = "@procResult", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
-
-            Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, "EXEC @procResult = [dbo].[sp_creatediagram] @diagramname, @owner_id, @version, @definition", diagramnameParam, ownerIdParam, versionParam, definitionParam, procResultParam);
-
-            return (int)procResultParam.Value;
-        }
-
-        // SpCreatediagramAsync() cannot be created due to having out parameters, or is relying on the procedure result (int)
-
-        public int SpDropdiagram(string diagramname, int? ownerId)
-        {
-            var diagramnameParam = new SqlParameter { ParameterName = "@diagramname", SqlDbType = SqlDbType.NVarChar, Direction = ParameterDirection.Input, Value = diagramname, Size = 128 };
-            if (diagramnameParam.Value == null)
-                diagramnameParam.Value = DBNull.Value;
-
-            var ownerIdParam = new SqlParameter { ParameterName = "@owner_id", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Input, Value = ownerId.GetValueOrDefault(), Precision = 10, Scale = 0 };
-            if (!ownerId.HasValue)
-                ownerIdParam.Value = DBNull.Value;
-
-            var procResultParam = new SqlParameter { ParameterName = "@procResult", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
-
-            Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, "EXEC @procResult = [dbo].[sp_dropdiagram] @diagramname, @owner_id", diagramnameParam, ownerIdParam, procResultParam);
-
-            return (int)procResultParam.Value;
-        }
-
-        // SpDropdiagramAsync() cannot be created due to having out parameters, or is relying on the procedure result (int)
-
-        public List<SpHelpdiagramdefinitionReturnModel> SpHelpdiagramdefinition(string diagramname, int? ownerId)
-        {
-            int procResult;
-            return SpHelpdiagramdefinition(diagramname, ownerId, out procResult);
-        }
-
-        public List<SpHelpdiagramdefinitionReturnModel> SpHelpdiagramdefinition(string diagramname, int? ownerId, out int procResult)
-        {
-            var diagramnameParam = new SqlParameter { ParameterName = "@diagramname", SqlDbType = SqlDbType.NVarChar, Direction = ParameterDirection.Input, Value = diagramname, Size = 128 };
-            if (diagramnameParam.Value == null)
-                diagramnameParam.Value = DBNull.Value;
-
-            var ownerIdParam = new SqlParameter { ParameterName = "@owner_id", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Input, Value = ownerId.GetValueOrDefault(), Precision = 10, Scale = 0 };
-            if (!ownerId.HasValue)
-                ownerIdParam.Value = DBNull.Value;
-
-            var procResultParam = new SqlParameter { ParameterName = "@procResult", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
-            var procResultData = Database.SqlQuery<SpHelpdiagramdefinitionReturnModel>("EXEC @procResult = [dbo].[sp_helpdiagramdefinition] @diagramname, @owner_id", diagramnameParam, ownerIdParam, procResultParam).ToList();
-            procResult = (int) procResultParam.Value;
-            return procResultData;
-        }
-
-        public async Task<List<SpHelpdiagramdefinitionReturnModel>> SpHelpdiagramdefinitionAsync(string diagramname, int? ownerId)
-        {
-            var diagramnameParam = new SqlParameter { ParameterName = "@diagramname", SqlDbType = SqlDbType.NVarChar, Direction = ParameterDirection.Input, Value = diagramname, Size = 128 };
-            if (diagramnameParam.Value == null)
-                diagramnameParam.Value = DBNull.Value;
-
-            var ownerIdParam = new SqlParameter { ParameterName = "@owner_id", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Input, Value = ownerId.GetValueOrDefault(), Precision = 10, Scale = 0 };
-            if (!ownerId.HasValue)
-                ownerIdParam.Value = DBNull.Value;
-
-            var procResultData = await Database.SqlQuery<SpHelpdiagramdefinitionReturnModel>("EXEC [dbo].[sp_helpdiagramdefinition] @diagramname, @owner_id", diagramnameParam, ownerIdParam).ToListAsync();
-            return procResultData;
-        }
-
-        public List<SpHelpdiagramsReturnModel> SpHelpdiagrams(string diagramname, int? ownerId)
-        {
-            int procResult;
-            return SpHelpdiagrams(diagramname, ownerId, out procResult);
-        }
-
-        public List<SpHelpdiagramsReturnModel> SpHelpdiagrams(string diagramname, int? ownerId, out int procResult)
-        {
-            var diagramnameParam = new SqlParameter { ParameterName = "@diagramname", SqlDbType = SqlDbType.NVarChar, Direction = ParameterDirection.Input, Value = diagramname, Size = 128 };
-            if (diagramnameParam.Value == null)
-                diagramnameParam.Value = DBNull.Value;
-
-            var ownerIdParam = new SqlParameter { ParameterName = "@owner_id", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Input, Value = ownerId.GetValueOrDefault(), Precision = 10, Scale = 0 };
-            if (!ownerId.HasValue)
-                ownerIdParam.Value = DBNull.Value;
-
-            var procResultParam = new SqlParameter { ParameterName = "@procResult", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
-            var procResultData = Database.SqlQuery<SpHelpdiagramsReturnModel>("EXEC @procResult = [dbo].[sp_helpdiagrams] @diagramname, @owner_id", diagramnameParam, ownerIdParam, procResultParam).ToList();
-            procResult = (int) procResultParam.Value;
-            return procResultData;
-        }
-
-        public async Task<List<SpHelpdiagramsReturnModel>> SpHelpdiagramsAsync(string diagramname, int? ownerId)
-        {
-            var diagramnameParam = new SqlParameter { ParameterName = "@diagramname", SqlDbType = SqlDbType.NVarChar, Direction = ParameterDirection.Input, Value = diagramname, Size = 128 };
-            if (diagramnameParam.Value == null)
-                diagramnameParam.Value = DBNull.Value;
-
-            var ownerIdParam = new SqlParameter { ParameterName = "@owner_id", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Input, Value = ownerId.GetValueOrDefault(), Precision = 10, Scale = 0 };
-            if (!ownerId.HasValue)
-                ownerIdParam.Value = DBNull.Value;
-
-            var procResultData = await Database.SqlQuery<SpHelpdiagramsReturnModel>("EXEC [dbo].[sp_helpdiagrams] @diagramname, @owner_id", diagramnameParam, ownerIdParam).ToListAsync();
-            return procResultData;
-        }
-
-        public int SpRenamediagram(string diagramname, int? ownerId, string newDiagramname)
-        {
-            var diagramnameParam = new SqlParameter { ParameterName = "@diagramname", SqlDbType = SqlDbType.NVarChar, Direction = ParameterDirection.Input, Value = diagramname, Size = 128 };
-            if (diagramnameParam.Value == null)
-                diagramnameParam.Value = DBNull.Value;
-
-            var ownerIdParam = new SqlParameter { ParameterName = "@owner_id", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Input, Value = ownerId.GetValueOrDefault(), Precision = 10, Scale = 0 };
-            if (!ownerId.HasValue)
-                ownerIdParam.Value = DBNull.Value;
-
-            var newDiagramnameParam = new SqlParameter { ParameterName = "@new_diagramname", SqlDbType = SqlDbType.NVarChar, Direction = ParameterDirection.Input, Value = newDiagramname, Size = 128 };
-            if (newDiagramnameParam.Value == null)
-                newDiagramnameParam.Value = DBNull.Value;
-
-            var procResultParam = new SqlParameter { ParameterName = "@procResult", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
-
-            Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, "EXEC @procResult = [dbo].[sp_renamediagram] @diagramname, @owner_id, @new_diagramname", diagramnameParam, ownerIdParam, newDiagramnameParam, procResultParam);
-
-            return (int)procResultParam.Value;
-        }
-
-        // SpRenamediagramAsync() cannot be created due to having out parameters, or is relying on the procedure result (int)
-
-        public int SpUpgraddiagrams()
-        {
-            var procResultParam = new SqlParameter { ParameterName = "@procResult", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
-
-            Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, "EXEC @procResult = [dbo].[sp_upgraddiagrams] ", procResultParam);
-
-            return (int)procResultParam.Value;
-        }
-
-        // SpUpgraddiagramsAsync() cannot be created due to having out parameters, or is relying on the procedure result (int)
-
     }
 
     #endregion
@@ -400,13 +194,13 @@ namespace Kebattle.DomainModel
     public class FakeMyDbContext : IMyDbContext
     {
         public DbSet<AspNetUser> AspNetUsers { get; set; } // AspNetUsers
-        public DbSet<AspNetUserRole> AspNetUserRoles { get; set; } // AspNetUserRoles
         public DbSet<CompaniesPrice> CompaniesPrices { get; set; } // Companies_Prices
         public DbSet<Company> Companies { get; set; } // Companies
         public DbSet<KebabSize> KebabSizes { get; set; } // KebabSizes
         public DbSet<KebabType> KebabTypes { get; set; } // KebabTypes
         public DbSet<MeatType> MeatTypes { get; set; } // MeatTypes
         public DbSet<Order> Orders { get; set; } // Orders
+        public DbSet<OrderStatus> OrderStatus { get; set; } // OrderStatuses
         public DbSet<SauceType> SauceTypes { get; set; } // SauceTypes
         public DbSet<sys_DatabaseFirewallRule> sys_DatabaseFirewallRules { get; set; } // database_firewall_rules
 
@@ -417,13 +211,13 @@ namespace Kebattle.DomainModel
             _database = null;
 
             AspNetUsers = new FakeDbSet<AspNetUser>("Id");
-            AspNetUserRoles = new FakeDbSet<AspNetUserRole>("UserId", "RoleId");
             CompaniesPrices = new FakeDbSet<CompaniesPrice>("Id");
             Companies = new FakeDbSet<Company>("Id");
             KebabSizes = new FakeDbSet<KebabSize>("Id");
             KebabTypes = new FakeDbSet<KebabType>("Id");
             MeatTypes = new FakeDbSet<MeatType>("Id");
             Orders = new FakeDbSet<Order>("Id");
+            OrderStatus = new FakeDbSet<OrderStatus>("Id");
             SauceTypes = new FakeDbSet<SauceType>("Id");
             sys_DatabaseFirewallRules = new FakeDbSet<sys_DatabaseFirewallRule>("Id", "Name", "StartIpAddress", "EndIpAddress", "CreateDate", "ModifyDate");
 
@@ -498,79 +292,6 @@ namespace Kebattle.DomainModel
         {
             throw new NotImplementedException();
         }
-
-        // Stored Procedures
-
-        public int SpAlterdiagram(string diagramname, int? ownerId, int? version, byte[] definition)
-        {
-            return 0;
-        }
-
-        // SpAlterdiagramAsync() cannot be created due to having out parameters, or is relying on the procedure result (int)
-
-        public int SpCreatediagram(string diagramname, int? ownerId, int? version, byte[] definition)
-        {
-            return 0;
-        }
-
-        // SpCreatediagramAsync() cannot be created due to having out parameters, or is relying on the procedure result (int)
-
-        public int SpDropdiagram(string diagramname, int? ownerId)
-        {
-            return 0;
-        }
-
-        // SpDropdiagramAsync() cannot be created due to having out parameters, or is relying on the procedure result (int)
-
-        public List<SpHelpdiagramdefinitionReturnModel> SpHelpdiagramdefinition(string diagramname, int? ownerId)
-        {
-            int procResult;
-            return SpHelpdiagramdefinition(diagramname, ownerId, out procResult);
-        }
-
-        public List<SpHelpdiagramdefinitionReturnModel> SpHelpdiagramdefinition(string diagramname, int? ownerId, out int procResult)
-        {
-            procResult = 0;
-            return new List<SpHelpdiagramdefinitionReturnModel>();
-        }
-
-        public Task<List<SpHelpdiagramdefinitionReturnModel>> SpHelpdiagramdefinitionAsync(string diagramname, int? ownerId)
-        {
-            int procResult;
-            return Task.FromResult(SpHelpdiagramdefinition(diagramname, ownerId, out procResult));
-        }
-
-        public List<SpHelpdiagramsReturnModel> SpHelpdiagrams(string diagramname, int? ownerId)
-        {
-            int procResult;
-            return SpHelpdiagrams(diagramname, ownerId, out procResult);
-        }
-
-        public List<SpHelpdiagramsReturnModel> SpHelpdiagrams(string diagramname, int? ownerId, out int procResult)
-        {
-            procResult = 0;
-            return new List<SpHelpdiagramsReturnModel>();
-        }
-
-        public Task<List<SpHelpdiagramsReturnModel>> SpHelpdiagramsAsync(string diagramname, int? ownerId)
-        {
-            int procResult;
-            return Task.FromResult(SpHelpdiagrams(diagramname, ownerId, out procResult));
-        }
-
-        public int SpRenamediagram(string diagramname, int? ownerId, string newDiagramname)
-        {
-            return 0;
-        }
-
-        // SpRenamediagramAsync() cannot be created due to having out parameters, or is relying on the procedure result (int)
-
-        public int SpUpgraddiagrams()
-        {
-            return 0;
-        }
-
-        // SpUpgraddiagramsAsync() cannot be created due to having out parameters, or is relying on the procedure result (int)
     }
 
     #endregion
@@ -862,9 +583,9 @@ namespace Kebattle.DomainModel
         // Reverse navigation
 
         /// <summary>
-        /// Child Companies where [Companies].[OwerId] point to this entity (FK_Users_Companies)
+        /// Child Companies where [Companies].[OwnerId] point to this entity (FK_Companies_AspNetUsers)
         /// </summary>
-        public virtual ICollection<Company> Companies { get; set; } // Companies.FK_Users_Companies
+        public virtual ICollection<Company> Companies { get; set; } // Companies.FK_Companies_AspNetUsers
 
         /// <summary>
         /// Child Orders where [Orders].[AddedBy] point to this entity (FK_Orders_AspNetUsers)
@@ -884,13 +605,6 @@ namespace Kebattle.DomainModel
         }
     }
 
-    // AspNetUserRoles
-    public class AspNetUserRole
-    {
-        public string UserId { get; set; } // UserId (Primary key) (length: 128)
-        public string RoleId { get; set; } // RoleId (Primary key) (length: 128)
-    }
-
     // Companies_Prices
     public class CompaniesPrice
     {
@@ -901,19 +615,7 @@ namespace Kebattle.DomainModel
         public bool IsActive { get; set; } // IsActive
         public decimal Price { get; set; } // Price
 
-        // Reverse navigation
-
-        /// <summary>
-        /// Parent (One-to-One) CompaniesPrice pointed by [Companies_Prices].[Id] (FK_Companies_Prices_Companies_Prices)
-        /// </summary>
-        public virtual CompaniesPrice CompaniesPrice2 { get; set; } // Companies_Prices.FK_Companies_Prices_Companies_Prices
-
         // Foreign keys
-
-        /// <summary>
-        /// Parent CompaniesPrice pointed by [Companies_Prices].([Id]) (FK_Companies_Prices_Companies_Prices)
-        /// </summary>
-        public virtual CompaniesPrice CompaniesPrice1 { get; set; } // FK_Companies_Prices_Companies_Prices
 
         /// <summary>
         /// Parent Company pointed by [Companies_Prices].([CompanyId]) (FK_Companies_Prices_Companies)
@@ -925,11 +627,10 @@ namespace Kebattle.DomainModel
         /// </summary>
         public virtual KebabSize KebabSize { get; set; } // FK_Companies_Prices_KebabSizes
 
-        public CompaniesPrice()
-        {
-            IsActive = false;
-            Price = 0m;
-        }
+        /// <summary>
+        /// Parent KebabType pointed by [Companies_Prices].([KebabTypeId]) (FK_Companies_Prices_KebabTypes)
+        /// </summary>
+        public virtual KebabType KebabType { get; set; } // FK_Companies_Prices_KebabTypes
     }
 
     // Companies
@@ -937,7 +638,8 @@ namespace Kebattle.DomainModel
     {
         public int Id { get; set; } // Id (Primary key)
         public string Name { get; set; } // Name (length: 50)
-        public string OwerId { get; set; } // OwerId (length: 128)
+        public string OwnerId { get; set; } // OwnerId (length: 128)
+        public string Url { get; set; } // Url
 
         // Reverse navigation
 
@@ -954,12 +656,13 @@ namespace Kebattle.DomainModel
         // Foreign keys
 
         /// <summary>
-        /// Parent AspNetUser pointed by [Companies].([OwerId]) (FK_Users_Companies)
+        /// Parent AspNetUser pointed by [Companies].([OwnerId]) (FK_Companies_AspNetUsers)
         /// </summary>
-        public virtual AspNetUser AspNetUser { get; set; } // FK_Users_Companies
+        public virtual AspNetUser AspNetUser { get; set; } // FK_Companies_AspNetUsers
 
         public Company()
         {
+            Url = "~/Resources/default.jpg";
             CompaniesPrices = new List<CompaniesPrice>();
             Orders = new List<Order>();
         }
@@ -1001,12 +704,18 @@ namespace Kebattle.DomainModel
         // Reverse navigation
 
         /// <summary>
-        /// Child Orders where [Orders].[KebabTypeId] point to this entity (FK_Orders_KebabType)
+        /// Child CompaniesPrices where [Companies_Prices].[KebabTypeId] point to this entity (FK_Companies_Prices_KebabTypes)
         /// </summary>
-        public virtual ICollection<Order> Orders { get; set; } // Orders.FK_Orders_KebabType
+        public virtual ICollection<CompaniesPrice> CompaniesPrices { get; set; } // Companies_Prices.FK_Companies_Prices_KebabTypes
+
+        /// <summary>
+        /// Child Orders where [Orders].[KebabTypeId] point to this entity (FK_Orders_KebabTypes)
+        /// </summary>
+        public virtual ICollection<Order> Orders { get; set; } // Orders.FK_Orders_KebabTypes
 
         public KebabType()
         {
+            CompaniesPrices = new List<CompaniesPrice>();
             Orders = new List<Order>();
         }
     }
@@ -1021,9 +730,9 @@ namespace Kebattle.DomainModel
         // Reverse navigation
 
         /// <summary>
-        /// Child Orders where [Orders].[MeatTypeId] point to this entity (FK_Orders_MeatType)
+        /// Child Orders where [Orders].[MeatTypeId] point to this entity (FK_Orders_MeatTypes)
         /// </summary>
-        public virtual ICollection<Order> Orders { get; set; } // Orders.FK_Orders_MeatType
+        public virtual ICollection<Order> Orders { get; set; } // Orders.FK_Orders_MeatTypes
 
         public MeatType()
         {
@@ -1036,6 +745,7 @@ namespace Kebattle.DomainModel
     {
         public int Id { get; set; } // Id (Primary key)
         public int CompanyId { get; set; } // CompanyId
+        public int OrderStatusId { get; set; } // OrderStatusID
         public string Name { get; set; } // Name (length: 150)
         public int KebabTypeId { get; set; } // KebabTypeId
         public int SauceTypeId { get; set; } // SauceTypeId
@@ -1071,14 +781,19 @@ namespace Kebattle.DomainModel
         public virtual KebabSize KebabSize { get; set; } // FK_Orders_KebabSizes
 
         /// <summary>
-        /// Parent KebabType pointed by [Orders].([KebabTypeId]) (FK_Orders_KebabType)
+        /// Parent KebabType pointed by [Orders].([KebabTypeId]) (FK_Orders_KebabTypes)
         /// </summary>
-        public virtual KebabType KebabType { get; set; } // FK_Orders_KebabType
+        public virtual KebabType KebabType { get; set; } // FK_Orders_KebabTypes
 
         /// <summary>
-        /// Parent MeatType pointed by [Orders].([MeatTypeId]) (FK_Orders_MeatType)
+        /// Parent MeatType pointed by [Orders].([MeatTypeId]) (FK_Orders_MeatTypes)
         /// </summary>
-        public virtual MeatType MeatType { get; set; } // FK_Orders_MeatType
+        public virtual MeatType MeatType { get; set; } // FK_Orders_MeatTypes
+
+        /// <summary>
+        /// Parent OrderStatus pointed by [Orders].([OrderStatusId]) (FK_Orders_OrderStatuses)
+        /// </summary>
+        public virtual OrderStatus OrderStatus { get; set; } // FK_Orders_OrderStatuses
 
         /// <summary>
         /// Parent SauceType pointed by [Orders].([SauceTypeId]) (FK_Orders_SauceTypes)
@@ -1087,8 +802,26 @@ namespace Kebattle.DomainModel
 
         public Order()
         {
-            Price = 0m;
-            DateAdded = DateTime.Now;
+            OrderStatusId = 1;
+        }
+    }
+
+    // OrderStatuses
+    public class OrderStatus
+    {
+        public int Id { get; set; } // Id (Primary key)
+        public string Name { get; set; } // Name (length: 100)
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child Orders where [Orders].[OrderStatusID] point to this entity (FK_Orders_OrderStatuses)
+        /// </summary>
+        public virtual ICollection<Order> Orders { get; set; } // Orders.FK_Orders_OrderStatuses
+
+        public OrderStatus()
+        {
+            Orders = new List<Order>();
         }
     }
 
@@ -1160,24 +893,6 @@ namespace Kebattle.DomainModel
         }
     }
 
-    // AspNetUserRoles
-    public class AspNetUserRoleConfiguration : EntityTypeConfiguration<AspNetUserRole>
-    {
-        public AspNetUserRoleConfiguration()
-            : this("dbo")
-        {
-        }
-
-        public AspNetUserRoleConfiguration(string schema)
-        {
-            ToTable("AspNetUserRoles", schema);
-            HasKey(x => new { x.UserId, x.RoleId });
-
-            Property(x => x.UserId).HasColumnName(@"UserId").HasColumnType("nvarchar").IsRequired().HasMaxLength(128).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-            Property(x => x.RoleId).HasColumnName(@"RoleId").HasColumnType("nvarchar").IsRequired().HasMaxLength(128).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-        }
-    }
-
     // Companies_Prices
     public class CompaniesPriceConfiguration : EntityTypeConfiguration<CompaniesPrice>
     {
@@ -1199,9 +914,9 @@ namespace Kebattle.DomainModel
             Property(x => x.Price).HasColumnName(@"Price").HasColumnType("decimal").IsRequired().HasPrecision(18,0);
 
             // Foreign keys
-            HasRequired(a => a.CompaniesPrice1).WithOptional(b => b.CompaniesPrice2).WillCascadeOnDelete(false); // FK_Companies_Prices_Companies_Prices
             HasRequired(a => a.Company).WithMany(b => b.CompaniesPrices).HasForeignKey(c => c.CompanyId).WillCascadeOnDelete(false); // FK_Companies_Prices_Companies
             HasRequired(a => a.KebabSize).WithMany(b => b.CompaniesPrices).HasForeignKey(c => c.KebabSizeId).WillCascadeOnDelete(false); // FK_Companies_Prices_KebabSizes
+            HasRequired(a => a.KebabType).WithMany(b => b.CompaniesPrices).HasForeignKey(c => c.KebabTypeId).WillCascadeOnDelete(false); // FK_Companies_Prices_KebabTypes
         }
     }
 
@@ -1220,10 +935,11 @@ namespace Kebattle.DomainModel
 
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
             Property(x => x.Name).HasColumnName(@"Name").HasColumnType("nvarchar").IsOptional().HasMaxLength(50);
-            Property(x => x.OwerId).HasColumnName(@"OwerId").HasColumnType("nvarchar").IsRequired().HasMaxLength(128);
+            Property(x => x.OwnerId).HasColumnName(@"OwnerId").HasColumnType("nvarchar").IsRequired().HasMaxLength(128);
+            Property(x => x.Url).HasColumnName(@"Url").HasColumnType("nvarchar(max)").IsRequired();
 
             // Foreign keys
-            HasRequired(a => a.AspNetUser).WithMany(b => b.Companies).HasForeignKey(c => c.OwerId).WillCascadeOnDelete(false); // FK_Users_Companies
+            HasRequired(a => a.AspNetUser).WithMany(b => b.Companies).HasForeignKey(c => c.OwnerId).WillCascadeOnDelete(false); // FK_Companies_AspNetUsers
         }
     }
 
@@ -1299,6 +1015,7 @@ namespace Kebattle.DomainModel
 
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(x => x.CompanyId).HasColumnName(@"CompanyId").HasColumnType("int").IsRequired();
+            Property(x => x.OrderStatusId).HasColumnName(@"OrderStatusID").HasColumnType("int").IsRequired();
             Property(x => x.Name).HasColumnName(@"Name").HasColumnType("nvarchar").IsOptional().HasMaxLength(150);
             Property(x => x.KebabTypeId).HasColumnName(@"KebabTypeId").HasColumnType("int").IsRequired();
             Property(x => x.SauceTypeId).HasColumnName(@"SauceTypeId").HasColumnType("int").IsRequired();
@@ -1316,9 +1033,28 @@ namespace Kebattle.DomainModel
             HasRequired(a => a.AspNetUser_AddedBy).WithMany(b => b.Orders_AddedBy).HasForeignKey(c => c.AddedBy).WillCascadeOnDelete(false); // FK_Orders_AspNetUsers
             HasRequired(a => a.Company).WithMany(b => b.Orders).HasForeignKey(c => c.CompanyId).WillCascadeOnDelete(false); // FK_Orders_Companies
             HasRequired(a => a.KebabSize).WithMany(b => b.Orders).HasForeignKey(c => c.KebabSizeId).WillCascadeOnDelete(false); // FK_Orders_KebabSizes
-            HasRequired(a => a.KebabType).WithMany(b => b.Orders).HasForeignKey(c => c.KebabTypeId).WillCascadeOnDelete(false); // FK_Orders_KebabType
-            HasRequired(a => a.MeatType).WithMany(b => b.Orders).HasForeignKey(c => c.MeatTypeId).WillCascadeOnDelete(false); // FK_Orders_MeatType
+            HasRequired(a => a.KebabType).WithMany(b => b.Orders).HasForeignKey(c => c.KebabTypeId).WillCascadeOnDelete(false); // FK_Orders_KebabTypes
+            HasRequired(a => a.MeatType).WithMany(b => b.Orders).HasForeignKey(c => c.MeatTypeId).WillCascadeOnDelete(false); // FK_Orders_MeatTypes
+            HasRequired(a => a.OrderStatus).WithMany(b => b.Orders).HasForeignKey(c => c.OrderStatusId).WillCascadeOnDelete(false); // FK_Orders_OrderStatuses
             HasRequired(a => a.SauceType).WithMany(b => b.Orders).HasForeignKey(c => c.SauceTypeId).WillCascadeOnDelete(false); // FK_Orders_SauceTypes
+        }
+    }
+
+    // OrderStatuses
+    public class OrderStatusConfiguration : EntityTypeConfiguration<OrderStatus>
+    {
+        public OrderStatusConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public OrderStatusConfiguration(string schema)
+        {
+            ToTable("OrderStatuses", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+            Property(x => x.Name).HasColumnName(@"Name").HasColumnType("nvarchar").IsRequired().HasMaxLength(100);
         }
     }
 
@@ -1361,30 +1097,6 @@ namespace Kebattle.DomainModel
             Property(x => x.CreateDate).HasColumnName(@"create_date").HasColumnType("datetime").IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
             Property(x => x.ModifyDate).HasColumnName(@"modify_date").HasColumnType("datetime").IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
         }
-    }
-
-
-    #endregion
-
-    #region Stored procedure return models
-
-    // ****************************************************************************************************
-    // This is not a commercial licence, therefore only a few tables/views/stored procedures are generated.
-    // ****************************************************************************************************
-
-    public class SpHelpdiagramdefinitionReturnModel
-    {
-        public int? version { get; set; }
-        public byte[] definition { get; set; }
-    }
-
-    public class SpHelpdiagramsReturnModel
-    {
-        public string Database { get; set; }
-        public string Name { get; set; }
-        public int ID { get; set; }
-        public string Owner { get; set; }
-        public int OwnerID { get; set; }
     }
 
 

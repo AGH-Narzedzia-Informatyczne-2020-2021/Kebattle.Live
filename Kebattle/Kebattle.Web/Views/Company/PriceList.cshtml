@@ -1,0 +1,42 @@
+﻿@model Kebattle.Web.Models.Company.SettingsViewModel
+@{
+    ViewBag.Title = "Ustawienia";
+}
+
+<h2>Cennik - @Model.CompanyName</h2>
+<hr>
+<table class="table bg-light table-bordered">
+    <thead class="text-center">
+        <tr>
+            <th></th>
+            @foreach (var type in Model.KebabTypes)
+            {
+                <th>@type.Name</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @{int i = 0;}
+        @foreach (var size in Model.KebabSizes)
+        {
+            <tr>
+                <td class="text-center">@size.Name</td>
+                @foreach (var type in Model.KebabTypes)
+                {
+                    var price = Model.CompaniesPrice.Where(a => a.KebabSizeId == size.Id && a.KebabTypeId == type.Id).FirstOrDefault();
+                    <td class="text-center @Html.Raw(price != null && price.IsActive ? "text-success" : "")">
+                        @if (price != null && price.IsActive)
+                        {
+                            @Html.Raw(price.Price + " zł")
+                        }
+                        else
+                        {
+                            @Html.Raw("-")
+                        }
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+
+</table>

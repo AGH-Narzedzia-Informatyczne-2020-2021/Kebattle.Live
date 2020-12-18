@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Kebattle.Web.Models.Home.HomeViewModel
+@{
     ViewBag.Title = "Home Page";
 }
 <div class="text-center">
@@ -25,6 +26,9 @@
                 Będziesz mógł sprawdzić aktualny status realizacji swojego zamówienia, oraz dowiesz się, gdy zostało już przygotowane i można je
                 odebrać.
                 Jeśli jesteś zaś restauracją, możesz zacząć z nami współpracę - rejestrując się na naszej stronie jako ”Firma”.
+                <hr />
+                <h6 class="text-center">Ilość restauracji: @Model.Companies.Count()</h6>
+                <h6 class="text-center">Ilość złożonych zamówień: @Model.Orders.Count()</h6>
             </p>
         </div>
     </div>
